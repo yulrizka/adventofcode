@@ -77,6 +77,7 @@ https://doc.rust-lang.org/nightly/rust-by-example/attribute.html
 
 ## Benchmarking in rust
 
+
 https://doc.rust-lang.org/1.2.0/book/benchmark-tests.html
 
 ```rust
@@ -91,6 +92,22 @@ mod tests {
     }
 }
 ```
+
+Couldn't get the standard benchmark in rust works, got error
+
+```
+use of unstable library feature 'test': `bench` is a part of custom test frameworks which are unstable
+```
+
+After googling found that the feature needs a nightly build. I don't want to go to that direction,
+
+Instead, looked into [Criterion library](https://bheisler.github.io/criterion.rs/book/getting_started.html)
+
+## Crates and module
+
+To use criterion, the project needed to be structured differently. Need to understand how rust is structured.
+
+https://doc.rust-lang.org/1.2.0/book/crates-and-modules.html
 
 ## References
 
