@@ -1,0 +1,17 @@
+[package]
+name = "aoc201901"
+version = "0.1.0"
+authors = ["Ahmy Yulrizka <yulrizka@users.noreply.github.com>"]
+edition = "2018"
+
+[lib]
+name = "aoc201901"
+path = "./src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench"
+harness = false
