@@ -1,43 +1,57 @@
 use std::fs;
+use crate::OpCode::{Add, Multiply, Halt};
 
-pub fn get_input() -> Vec<i64> {
+pub fn get_input() -> Vec<usize> {
     let data = fs::read_to_string("../input").expect("unable to open file");
     data.trim().split(",")
-        .map(|l| l.parse::<i64>().expect(&format!("failed to parse input {}", l)))
+        .map(|l| l.parse::<usize>().expect(&format!("failed to parse input {}", l)))
         .collect()
 }
 
-pub fn compute(code: &mut [i64]) -> Vec<i64> {
-    let mut ip = 0; // instruction pointer
-    while ip < code.len() {
-        let opcode = code[ip];
-        if opcode == 99 {
-            return code.to_vec()
+#[derive(PartialEq)]
+enum OpCode {
+    Add, Multiply, Halt
+}
+
+impl From<usize> for OpCode {
+    fn from(item: usize) -> Self {
+        match item {
+            1 => Add,
+            2 => Multiply,
+            99 => Halt,
+            _ => unreachable!()
         }
+    }
+}
 
-        // get 1st parameter
-        let pos_param1 = code[ip +1];
-        let param1 = code[pos_param1 as usize];
+pub fn compute(code: &mut [usize]) {
+    let mut sp = 0; // instruction pointer
 
-        // get 2nd parameter
-        let pos_param2 = code[ip +2];
-        let param2 = code[pos_param2 as usize];
+    while sp < code.len() {
+        let opcode = code[sp].into();
 
-        // get 3rd parameter (output position)
-        let param3 = code[ip +3];
-
-        let mut result = 0;
-        if opcode == 1 {
-            result = param1 + param2;
-        } else if opcode == 2 {
-            result = param1 * param2;
+        match opcode {
+            OpCode::Add => {
+                let p1 = code[sp+1];
+                let p2 = code[sp+2];
+                let p3 = code[sp+3];
+                code[p3] = code[p1] + code[p2];
+                sp += 4
+            },
+            OpCode::Multiply => {
+                let p1 = code[sp+1];
+                let p2 = code[sp+2];
+                let p3 = code[sp+3];
+                code[p3] = code[p1] * code[p2];
+                sp += 4;
+            }
+            OpCode::Halt => {
+                return
+            }
         }
-        code[param3 as usize] = result;
-
-        ip += 4
     }
 
-    panic!("should not come to this");
+    unreachable!()
 }
 
 #[cfg(test)]
@@ -46,10 +60,21 @@ mod tests {
 
     #[test]
     fn test_solve() {
-        assert_eq!(compute(&mut[1,0,0,0,99]), [2,0,0,0,99]);
-        assert_eq!(compute(&mut[2,3,0,3,99]), [2,3,0,6,99]);
-        assert_eq!(compute(&mut[2,4,4,5,99,0]), [2,4,4,5,99,9801]);
-        assert_eq!(compute(&mut[1,1,1,4,99,5,6,0,99]), [30,1,1,4,2,5,6,0,99]);
+        let input = &mut [1, 0, 0, 0, 99];
+        compute(input);
+        assert_eq!(input.to_vec(), [2,0,0,0,99]);
+
+        let input2 = &mut [2, 3, 0, 3, 99];
+        compute(input2);
+        assert_eq!(input2.to_vec(), [2,3,0,6,99]);
+
+        let input3 = &mut [2, 4, 4, 5, 99, 0];
+        compute(input3);
+        assert_eq!(input3.to_vec(), [2,4,4,5,99,9801]);
+
+        let input4 = &mut [1, 1, 1, 4, 99, 5, 6, 0, 99];
+        compute(input4);
+        assert_eq!(input4.to_vec(), [30,1,1,4,2,5,6,0,99]);
     }
 
     #[test]

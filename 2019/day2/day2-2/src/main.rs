@@ -5,7 +5,6 @@ fn main() {
 
     for noun in 0..99 {
         for verb in 0..99 {
-            print!("nound:{} verb:{}\n", noun, verb);
             let mut code = input.to_vec();
             code[1] = noun;
             code[2] = verb;
@@ -14,7 +13,7 @@ fn main() {
             let answer = code[0];
             if answer == 19690720 {
                 let result = 100 * noun + verb;
-                println!("answer: {}", result);
+                println!("answer:{} noun:{} verb:{}", result, noun, verb);
                 return
             }
         }
