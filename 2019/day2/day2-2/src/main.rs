@@ -13,7 +13,7 @@ fn main() {
             compute(&mut code);
             let answer = code[0];
             if answer == 19690720 {
-                let result = 100 * noun + ver;
+                let result = 100 * noun + verb;
                 println!("answer: {}", result);
                 return
             }
