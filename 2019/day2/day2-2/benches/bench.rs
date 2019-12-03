@@ -1,5 +1,5 @@
 use criterion::{Criterion, criterion_group, criterion_main};
-use aoc2019::{get_input, solve};
+use aoc201901::{get_input, solve};
 
 pub fn criterion_benchmark(c: &mut Criterion) {
         c.bench_function("2019 day 1 part 1", |b| {

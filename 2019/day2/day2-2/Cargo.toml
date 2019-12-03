@@ -1,0 +1,16 @@
+[package]
+name = "aoc2019"
+version = "0.1.0"
+authors = ["Ahmy Yulrizka <yulrizka@users.noreply.github.com>"]
+edition = "2018"
+
+[lib]
+name = "aoc2019"
+path = "./src/lib.rs"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "bench"
+harness = false
