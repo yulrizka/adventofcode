@@ -1,0 +1,13 @@
+[package]
+name = "aoc2019"
+version = "0.1.0"
+authors = ["Ahmy Yulrizka <yulrizka@users.noreply.github.com>"]
+edition = "2018"
+
+[lib]
+name = "aoc2019"
+path = "./src/lib.rs"
+
+[dependencies]
+log = "0.4"
+env_logger = "0.7.1"
