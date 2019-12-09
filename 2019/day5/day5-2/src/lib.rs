@@ -1,7 +1,6 @@
 use std::{fs, io};
 use crate::OpCode::{Add, Multiply, Input, Output, JumpIfTrue, JumpIfFalse, Halt, LessThan, Equals};
 use std::io::{Write, BufRead};
-use log::{debug};
 
 pub fn get_input() -> Vec<i32> {
     let data = fs::read_to_string("../input").expect("unable to open file");
@@ -33,16 +32,17 @@ impl From<usize> for OpCode {
 }
 
 
+// get_param get parameter (1 based index) from the code on the stack pointer
+// considering if the mode is immediate (return the value) or a pointer
 fn get_param(code: &mut[i32], sp: usize, mode: usize,  n: usize) -> i32 {
     let p1 = code[sp+n];
 
     // figure out the mode by shifting the integer
     let mut m = mode;
     if n > 1 {
-       m = (m/10*(n-1)) % 10
-    } else {
-        m = m % 10
+       m = m/(10*(n-1))
     }
+    m = m % 10;
 
     if m == 0 {
         // reference mode
@@ -50,12 +50,10 @@ fn get_param(code: &mut[i32], sp: usize, mode: usize,  n: usize) -> i32 {
             panic!("reference is negative");
         }
         let addr = p1 as usize;
-        // debug!("      GET_PARAM REF-> [{:?}] -> {:?}", addr, code[addr]);
         return code[addr];
     }
 
     // immediate mode
-    // debug!("      GET_PARAM IMMEDIATE -> {:?}", p1);
     return p1;
 }
 
@@ -69,19 +67,11 @@ pub fn compute(code: &mut [i32], input: &mut dyn BufRead) {
         let op = ((code[sp] as usize) % 100).into();
         let mode = (code[sp] / 100) as usize;
 
-//        debug!("  code[{}]:{:?}", sp, code[sp]);
-//        debug!("  op:{:?}", op);
-//        debug!("  mode:{:?}", mode);
-        
         match op {
             OpCode::Add => {
                 let p1 = get_param(code, sp, mode, 1);
                 let p2 = get_param(code, sp, mode, 2);
                 let p3 = code[sp+3] as usize;
-                let result = p1 + p2;
-//                debug!("    ADD p1:{:?}", p1);
-//                debug!("    ADD p2:{:?}", p2);
-//                debug!("    RESULT ADD [{:?}] -> {:?}", p3, result);
                 code[p3] = p1 + p2;
                 sp += 4
             },
@@ -103,7 +93,6 @@ pub fn compute(code: &mut [i32], input: &mut dyn BufRead) {
                     .read_line(&mut input_text)
                     .expect("failed to read from stdin");
                 let val =  input_text.trim().parse::<i32>().expect("failed parsing value");
-//                debug!("    RESULT INPUT [{:?}] -> {:?}", p1, val);
 
                 code[p1 as usize] = val;
                 sp += 2;
