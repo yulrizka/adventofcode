@@ -72,10 +72,7 @@ func checkTree(w *world, r int, d int) int64 {
 	for w.y != len(w.maps)-1 {
 		w.move(right, r)
 		w.move(down, d)
-		v := w.look()
-		vStr := string([]byte{v})
-		_ = vStr
-		if v == '#' {
+		if w.look() == '#' {
 			tree++
 		}
 	}
@@ -93,13 +90,18 @@ func Part1(f io.Reader) (string, error) {
 func Part2(f io.Reader) (string, error) {
 	w := ParseWorld(f)
 
-	a := checkTree(w, 1, 1)
-	b := checkTree(w, 3, 1)
-	c := checkTree(w, 5, 1)
-	d := checkTree(w, 7, 1)
-	e := checkTree(w, 3, 2)
+	input := [][]int{
+		{1, 1},
+		{3, 1},
+		{5, 1},
+		{7, 1},
+		{3, 2},
+	}
+	var multiplier int64 = 1
+	for _, dir := range input {
+		right, down := dir[0], dir[1]
+		multiplier *= checkTree(w, right, down)
+	}
 
-	tree := a * b * c * d * e
-
-	return strconv.FormatInt(tree, 10), nil
+	return strconv.FormatInt(multiplier, 10), nil
 }
