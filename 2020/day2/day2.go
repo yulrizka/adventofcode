@@ -1,4 +1,4 @@
-package day1
+package day2
 
 import (
 	"bufio"
@@ -28,7 +28,7 @@ func Part1(f io.Reader) (string, error) {
 
 		min, err := strconv.ParseInt(minStr, 10, 64)
 		if err != nil {
-		    return "", err
+			return "", err
 		}
 
 		max, err := strconv.ParseInt(maxStr, 10, 64)
@@ -44,7 +44,6 @@ func Part1(f io.Reader) (string, error) {
 
 	return strconv.FormatInt(valid, 10), nil
 }
-
 
 func Part2(f io.Reader) (string, error) {
 	s := bufio.NewScanner(f)
