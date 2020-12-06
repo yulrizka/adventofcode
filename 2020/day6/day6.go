@@ -22,10 +22,7 @@ func Part1(f io.Reader) (string, error) {
 			ans = map[byte]struct{}{}
 		}
 	}
-	// check the final one
-	if s.Text() == "" {
-		sum += len(ans)
-	}
+	sum += len(ans)
 
 	return strconv.FormatInt(int64(sum), 10), nil
 }
@@ -40,16 +37,18 @@ func Part2(f io.Reader) (string, error) {
 	check := func(text string) {
 		if text != "" {
 			numPerson++
-		} else {
-			for _, num := range ans {
-				if num == numPerson {
-					sum++
-				}
-			}
-
-			ans = map[byte]int{}
-			numPerson = 0
+			return
 		}
+
+		// end of group
+		for _, num := range ans {
+			if num == numPerson {
+				sum++
+			}
+		}
+
+		ans = map[byte]int{}
+		numPerson = 0
 	}
 
 	for s.Scan() {
