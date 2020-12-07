@@ -162,8 +162,7 @@ func Part2(f io.Reader) (string, error) {
 		return "", err
 	}
 
-	// -1 because we exclude (sum=1) on the top node
-	// Example if the node has no children, it will return 1 instead of 0 which is wrong
+	// -1 because we exclude the target it self (we only count how many bags inside the target)
 	count := g.countWeight(target) - 1
 
 	return strconv.FormatInt(count, 10), nil
