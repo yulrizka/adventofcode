@@ -68,6 +68,10 @@ func (g *graph) countWeight(name string) int64 {
 		panic("node not found")
 	}
 
+	if len(n.edges) == 0 {
+		return 1
+	}
+
 	sum := int64(1)
 	for edgeName, weight := range n.edges {
 		sum += weight * g.countWeight(edgeName)
@@ -85,25 +89,36 @@ func parse(f io.Reader) (*graph, error) {
 
 	s := bufio.NewScanner(f)
 	for s.Scan() {
+		// "light red bags contain 1 bright white bag, 2 muted yellow bags."
+		// -> "light red  contain 1 bright white , 2 muted yellow "
 		text := strings.ReplaceAll(s.Text(), "bags", "")
 		text = strings.ReplaceAll(text, "bag", "")
 		text = strings.ReplaceAll(text, ".", "")
 
+		// 0 -> "light red  "
+		// 1 -> " 1 bright white , 2 muted yellow "
 		fields := strings.Split(text, " contain ")
 		if len(fields) != 2 {
 			return nil, fmt.Errorf("first scan got %d want 2", len(fields))
 		}
 
+		// "light red"
 		name := strings.TrimSpace(fields[0])
 		n := newNode(name)
 		g.addNode(n)
 
+		// " 1 bright white , 2 muted yellow"
 		fields = strings.Split(fields[1], ",")
 		for _, f := range fields {
+			// "1 bright white"
 			f = strings.TrimSpace(f)
 			if strings.Contains(f, "no other") {
 				continue
 			}
+
+			// 0 -> 1 bright white"
+			// 1 -> 1
+			// 2 -> bright white
 			submatch := bagRx.FindStringSubmatch(f)
 			if len(submatch) != 3 {
 				return nil, fmt.Errorf("inside got %d want 3", len(submatch))
