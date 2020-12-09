@@ -11,18 +11,18 @@ func parse(match string, arg interface{}) (err error) {
 	switch v := arg.(type) {
 	case *bool:
 		*v, err = strconv.ParseBool(match)
-	case *complex64:
-		//vv, err := strconv.ParseComplex(match, 64)
-		//if err != nil {
-		//	return err
-		//}
-		//*v = complex64(vv)
-	case *complex128:
-		//vv, err := strconv.ParseComplex(match, 128)
-		//if err != nil {
-		//	return err
-		//}
-		//*v = vv
+	//case *complex64:
+	//vv, err := strconv.ParseComplex(match, 64)
+	//if err != nil {
+	//	return err
+	//}
+	//*v = complex64(vv)
+	//case *complex128:
+	//vv, err := strconv.ParseComplex(match, 128)
+	//if err != nil {
+	//	return err
+	//}
+	//*v = vv
 	case *int:
 		*v, err = strconv.Atoi(match)
 	case *int8:
@@ -123,4 +123,57 @@ func Scan(re *regexp.Regexp, s string, args ...interface{}) (err error) {
 		}
 	}
 	return err
+}
+
+type scanner struct {
+	matches   [][]string
+	i         int
+	numParsed int
+	args      []interface{}
+	err       error
+}
+
+func (s *scanner) Error() error {
+	return s.err
+}
+
+func (s *scanner) NumParsed() int {
+	return s.numParsed
+}
+
+func ScanAll(re *regexp.Regexp, s string) *scanner {
+	return &scanner{
+		matches: re.FindAllStringSubmatch(s, -1),
+	}
+}
+
+func (s *scanner) Scan(args ...interface{}) bool {
+	if s.err != nil || s.i >= len(s.matches) {
+		return false
+	}
+
+	m := s.matches[s.i]
+	if len(s.args) > len(m)-1 {
+		s.err = errors.New("got " + strconv.Itoa(len(s.args)) + " arguments for " + strconv.Itoa(len(m)-1) + " matches")
+		return false
+	}
+
+	if len(m) > 1 {
+		parsed := 0
+		for i, arg := range args {
+			if arg == nil {
+				continue
+			}
+			if s.err = parse(m[i+1], arg); s.err != nil {
+				return false
+			}
+			parsed++
+		}
+		s.numParsed = parsed
+
+	}
+
+	s.i++
+
+	return s.i <= len(s.matches)
 }

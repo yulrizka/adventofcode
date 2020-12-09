@@ -2,9 +2,13 @@ package adventofcode
 
 import (
 	"fmt"
+	"os"
 	"reflect"
 	"regexp"
+	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"github.com/stretchr/testify/require"
 )
@@ -96,22 +100,60 @@ func ok(t *testing.T, re *regexp.Regexp, s string, args []interface{}, want []in
 	}
 }
 
+func TestScanAll(t *testing.T) {
+	input := `light red bags contain 1 bright white bag, 2 muted yellow bags.
+dark orange bags contain 3 bright white bags, 4 muted yellow bags.
+bright white bags contain 1 shiny gold bag.
+muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
+shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.
+dark olive bags contain 3 faded blue bags, 4 dotted black bags.
+vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
+faded blue bags contain no other bags.
+dotted black bags contain no other bags.`
+
+	lines := strings.Split(input, "\n")
+
+	var got [][]interface{}
+
+	rx := regexp.MustCompile(`(\d+) (\w+ \w+) bag`)
+	for _, l := range lines {
+		var count int
+		var color string
+		sc := ScanAll(rx, l)
+		for sc.Scan(&count, &color) {
+			got = append(got, []interface{}{count, color})
+		}
+		assert.NoError(t, sc.err)
+	}
+
+	want := [][]interface{}{
+		{1, "bright white"}, {2, "muted yellow"},
+		{3, "bright white"}, {4, "muted yellow"},
+		{1, "shiny gold"},
+		{2, "shiny gold"}, {9, "faded blue"},
+		{1, "dark olive"}, {2, "vibrant plum"},
+		{3, "faded blue"}, {4, "dotted black"},
+		{5, "faded blue"}, {6, "dotted black"},
+	}
+
+	assert.EqualValues(t, want, got)
+}
+
 var (
 	text = "jmp +32"
-
-	rx = regexp.MustCompile(`(\w+) (\w+)`)
+	rx   = regexp.MustCompile(`(\w+) (\w+)`)
 )
 
 func withScan() {
 	var op string
 	var arg int64
-	fmt.Sscanf(text, "%s %d", &op, &arg)
+	_, _ = fmt.Sscanf(text, "%s %d", &op, &arg)
 }
 
 func withRegex() {
 	var op string
 	var arg int64
-	Scan(rx, text, &op, &arg)
+	_ = Scan(rx, text, &op, &arg)
 }
 
 // $ benchstat scan.txt regex.txt
@@ -119,7 +161,10 @@ func withRegex() {
 // Scan-8   108µs ± 1%   107µs ± 1%   ~     (p=0.222 n=5+5)
 func BenchmarkScan(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		//withScan()
-		withRegex()
+		if os.Getenv("TEST_SCAN") != "" {
+			withScan()
+		} else {
+			withRegex()
+		}
 	}
 }
