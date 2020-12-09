@@ -5,8 +5,11 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/yulrizka/adventofcode"
 )
 
 const (
@@ -14,6 +17,8 @@ const (
 	acc = "acc"
 	jmp = "jmp"
 )
+
+var rx = regexp.MustCompile(`(\w+) (.+)`)
 
 func isTerminate(lines []string) (success bool, accumulator int64) {
 	executed := map[int]struct{}{}
@@ -25,15 +30,12 @@ func isTerminate(lines []string) (success bool, accumulator int64) {
 			break
 		}
 
-		text := lines[i]
-		fields := strings.Fields(text)
-		if len(fields) != 2 {
-			log.Fatalf("invalid instruction %q line %d", text, i)
-		}
-		op := fields[0]
-		arg, err := strconv.ParseInt(fields[1], 10, 64)
-		if err != nil {
-			panic("failed to parse arg")
+		var (
+			op  string
+			arg int64
+		)
+		if err := adventofcode.Scan(rx, lines[i], &op, &arg); err != nil {
+			log.Fatal(err)
 		}
 
 		switch op {

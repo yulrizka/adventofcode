@@ -12,17 +12,17 @@ func parse(match string, arg interface{}) (err error) {
 	case *bool:
 		*v, err = strconv.ParseBool(match)
 	case *complex64:
-		vv, err := strconv.ParseComplex(match, 64)
-		if err != nil {
-			return err
-		}
-		*v = complex64(vv)
+		//vv, err := strconv.ParseComplex(match, 64)
+		//if err != nil {
+		//	return err
+		//}
+		//*v = complex64(vv)
 	case *complex128:
-		vv, err := strconv.ParseComplex(match, 128)
-		if err != nil {
-			return err
-		}
-		*v = vv
+		//vv, err := strconv.ParseComplex(match, 128)
+		//if err != nil {
+		//	return err
+		//}
+		//*v = vv
 	case *int:
 		*v, err = strconv.Atoi(match)
 	case *int8:

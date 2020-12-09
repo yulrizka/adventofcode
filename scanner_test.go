@@ -1,6 +1,7 @@
 package adventofcode
 
 import (
+	"fmt"
 	"reflect"
 	"regexp"
 	"testing"
@@ -92,5 +93,33 @@ func ok(t *testing.T, re *regexp.Regexp, s string, args []interface{}, want []in
 
 	for i, v := range want {
 		require.EqualValuesf(t, v, args[i], `got "%v" want "%v"`, reflect.ValueOf(args[i]).Elem(), reflect.ValueOf(v).Elem())
+	}
+}
+
+var (
+	text = "jmp +32"
+
+	rx = regexp.MustCompile(`(\w+) (\w+)`)
+)
+
+func withScan() {
+	var op string
+	var arg int64
+	fmt.Sscanf(text, "%s %d", &op, &arg)
+}
+
+func withRegex() {
+	var op string
+	var arg int64
+	Scan(rx, text, &op, &arg)
+}
+
+// $ benchstat scan.txt regex.txt
+// name    old time/op  new time/op  delta
+// Scan-8   108µs ± 1%   107µs ± 1%   ~     (p=0.222 n=5+5)
+func BenchmarkScan(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		//withScan()
+		withRegex()
 	}
 }
