@@ -10,9 +10,9 @@ import (
 
 func Part1(f io.Reader) (string, error) {
 	ints := adventofcode.MustInts(f)
-	ints = append(ints, 0)
+	ints = append(ints, 0) // outlet jolts
 	sort.Ints(ints)
-	ints = append(ints, ints[len(ints)-1]+3)
+	ints = append(ints, ints[len(ints)-1]+3) // device jolts
 
 	diffs := map[int]int{}
 	for i := 1; i < len(ints); i++ {
@@ -27,9 +27,9 @@ func Part1(f io.Reader) (string, error) {
 
 func Part2(r io.Reader) (string, error) {
 	ints := adventofcode.MustInts(r)
-	ints = append(ints, 0)
+	ints = append(ints, 0) // outlet jolts
 	sort.Sort(sort.Reverse(sort.IntSlice(ints)))
-	ints = append([]int{ints[0] + 3}, ints...)
+	ints = append([]int{ints[0] + 3}, ints...) //device jolts
 
 	mem := map[int]int{}
 	var f func(int []int) int

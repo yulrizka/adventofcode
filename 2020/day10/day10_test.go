@@ -11,7 +11,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	//adventofcode.Test(t, "sample-small", "8", Part2)
-	//adventofcode.Test(t, "sample", "19208", Part2)
-	adventofcode.Test(t, "input", "", Part2)
+	adventofcode.Test(t, "sample-small", "8", Part2)
+	adventofcode.Test(t, "sample", "19208", Part2)
+	adventofcode.Test(t, "input", "2314037239808", Part2)
 }
