@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -15,8 +16,8 @@ func Test(t *testing.T, path string, answer string, fn func(reader io.Reader) (s
 
 	defer f.Close()
 	gotAnswer, err := fn(f)
-	require.NoError(t, err)
-	require.EqualValues(t, answer, gotAnswer)
+	assert.NoError(t, err)
+	assert.EqualValues(t, answer, gotAnswer)
 
 	return gotAnswer
 }
