@@ -17,7 +17,7 @@ import (
 )
 
 func Part1(f io.Reader) (string, error) {
-  s := bufio.NewScanner(f)
+	s := bufio.NewScanner(f)
 	for s.Scan() {
 	}
 
