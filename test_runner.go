@@ -1,7 +1,9 @@
 package adventofcode
 
 import (
+	"bytes"
 	"io"
+	"io/ioutil"
 	"os"
 	"testing"
 
@@ -20,4 +22,14 @@ func Test(t *testing.T, path string, answer string, fn func(reader io.Reader) (s
 	assert.EqualValues(t, answer, gotAnswer)
 
 	return gotAnswer
+}
+
+func Bench(b *testing.B, path string, fn func(reader io.Reader) (string, error)) {
+	b.Helper()
+	bs, err := ioutil.ReadFile(path)
+	require.NoError(b, err)
+
+	for i := 0; i < b.N; i++ {
+		_, _ = fn(bytes.NewBuffer(bs))
+	}
 }
