@@ -23,6 +23,14 @@ func BenchmarkScan(b *testing.B) {
 	}
 
 	for i := 0; i < b.N; i++ {
-		Part1(bytes.NewReader(content))
+		_, _ = Part1(bytes.NewReader(content))
 	}
+}
+
+func BenchmarkPart1(b *testing.B) {
+	adventofcode.Bench(b, "input", Part1)
+}
+
+func BenchmarkPart2(b *testing.B) {
+	adventofcode.Bench(b, "input", Part2)
 }

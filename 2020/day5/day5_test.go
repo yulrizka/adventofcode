@@ -90,3 +90,11 @@ func rowCol(text string) (row, col int) {
 
 	return row, col
 }
+
+func BenchmarkPart1(b *testing.B) {
+	adventofcode.Bench(b, "input", Part1)
+}
+
+func BenchmarkPart2(b *testing.B) {
+	adventofcode.Bench(b, "input", Part2)
+}

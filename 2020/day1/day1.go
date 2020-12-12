@@ -53,7 +53,7 @@ func Part2(f io.Reader) (string, error) {
 					continue
 				}
 				if a, b, c := numbers[i], numbers[j], numbers[k]; a+b+c == wantSum {
-					fmt.Printf("a=%d b=%d c=%d\n", a, b, c)
+					//fmt.Printf("a=%d b=%d c=%d\n", a, b, c)
 					return strconv.FormatInt(a*b*c, 10), nil
 				}
 			}

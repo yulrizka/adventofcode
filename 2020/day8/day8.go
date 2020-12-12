@@ -86,7 +86,7 @@ func Part2(f io.Reader) (string, error) {
 
 			terminate, accumulator := isTerminate(mod)
 			if terminate {
-				fmt.Printf("line %d %q -> %q\n", i, lines[i], mod[i])
+				//fmt.Printf("line %d %q -> %q\n", i, lines[i], mod[i])
 				return strconv.FormatInt(accumulator, 10), true
 			}
 		}
