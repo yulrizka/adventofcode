@@ -2,21 +2,20 @@ package day13
 
 import (
 	"bufio"
-	"context"
-	"fmt"
 	"io"
-	"sort"
 	"strconv"
 	"strings"
 )
 
 func read(f io.Reader) (earliest int, buses []int) {
 	s := bufio.NewScanner(f)
+
 	s.Scan()
 	earliest, err := strconv.Atoi(s.Text())
 	if err != nil {
 		panic(err)
 	}
+
 	s.Scan()
 	for _, v := range strings.Split(s.Text(), ",") {
 		if v == "" || v == "x" {
@@ -52,88 +51,28 @@ func Part1(f io.Reader) (string, error) {
 }
 
 func Part2(f io.Reader) (string, error) {
+	// first approach (bruteforce) did not yield result.
+	// kudos: https://www.reddit.com/r/adventofcode/comments/kc4njx/2020_day_13_solutions/gfncyoc/?context=3
 	_, buses := read(f)
 
-	busesSort := make([]int, len(buses))
-	copy(busesSort, buses)
-	sort.Sort(sort.Reverse(sort.IntSlice(busesSort)))
+	ts, step := 0, 1
 
-	max := busesSort[0]
-	var maxI int
-
-	offsets := map[int]int{}
-	for i := 0; i < len(buses); i++ {
-		b := buses[i]
-		if b == max {
-			maxI = i
-			// find ts offset from the max bus id to the left
-			for l := i - 1; l >= 0; l-- {
-				bl := buses[l]
-				if bl > 0 {
-					offsets[bl] = l - i
-				}
-			}
-			// find ts offset from the max bus id to the right
-			for r := i + 1; r < len(buses); r++ {
-				bl := buses[r]
-				if bl > 0 {
-					offsets[bl] = r - i
-				}
-			}
+	// for each element, find how many steps needed for the condition to be true. At that point,
+	// we know that it will collide again after the same amount of 'steps'. So we can do the same for the
+	// next element
+	// eg part 1: [3,5,6], step=3. we know it will collide at 15 -> step = step*5=15.
+	// we then repeat the process to find when 15 & 6x will collide (check 15, 30) -> ans 30
+	//
+	// part 2 is the same, it's just we add the ts with index of the array to represent i minute after
+	for i, b := range buses {
+		if b == 0 {
+			continue
 		}
-	}
-
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	search := func(ctx context.Context, ts int) int {
-		var i int
-		for {
-			select {
-			case <-ctx.Done():
-				return 0
-			default:
-			}
-			found := true
-			for _, b := range busesSort[1:] {
-				if b == 0 {
-					break
-				}
-
-				offset := offsets[b]
-				leaveAt := ts + offset
-				if leaveAt%b != 0 {
-					found = false
-					break
-				}
-			}
-			if found {
-				ans := ts - maxI
-				return ans
-			}
-			ts += max
-			if i%100000 == 0 {
-				fmt.Printf("ts = %+v\n", ts) // TODO:for debugging
-			}
-
+		for (ts+i)%b != 0 { // + i because it's i minute after ts
+			ts += step
 		}
-
+		step *= b
 	}
 
-	var ans int
-
-	for w := 1; w < 16; w++ {
-		w := w
-		go func() {
-			as := search(ctx, w*max)
-			if as > 0 {
-				ans = as
-				fmt.Printf("ans = %+v\n", ans) // TODO:for debugging
-			}
-			cancel()
-		}()
-	}
-	<-ctx.Done()
-
-	return strconv.Itoa(ans), nil
+	return strconv.Itoa(ts), nil
 }
