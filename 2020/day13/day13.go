@@ -60,8 +60,8 @@ func Part2(f io.Reader) (string, error) {
 	// for each element, find how many steps needed for the condition to be true. At that point,
 	// we know that it will collide again after the same amount of 'steps'. So we can do the same for the
 	// next element
-	// eg part 1: [3,5,6], step=3. we know it will collide at 15 -> step = step*5=15.
-	// we then repeat the process to find when 15 & 6x will collide (check 15, 30) -> ans 30
+	// eg part 1: [3,5,6,..], step=3. we know it will collide 15 and every 15 steps -> step = 3*5=15.
+	// we then repeat the process to find when 15 & 6x will collide (check 15, 30) -> step = 15*6 = 90.
 	//
 	// part 2 is the same, it's just we add the ts with index of the array to represent i minute after
 	for i, b := range buses {
