@@ -45,4 +45,12 @@ func TestPart1(t *testing.T) {
 func TestPart2(t *testing.T) {
 	adventofcode.Test(t, "input", "", Part2)
 }
+
+func BenchmarkPart1(b *testing.B) {
+	adventofcode.Bench(b, "input", Part1)
+}
+
+func BenchmarkPart2(b *testing.B) {
+	adventofcode.Bench(b, "input", Part2)
+}
 EOF
