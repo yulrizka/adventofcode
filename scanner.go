@@ -104,14 +104,14 @@ func parse(match string, arg interface{}) (err error) {
 	return err
 }
 
-func Scan(re *regexp.Regexp, s string, args ...interface{}) (err error) {
+func Scan(re *regexp.Regexp, s string, args ...interface{}) (n int, err error) {
 	matches := re.FindStringSubmatch(s)
 	if len(matches) <= 1 {
-		return nil
+		return 0, nil
 	}
 
 	if len(args) > len(matches)-1 {
-		return errors.New("got " + strconv.Itoa(len(args)) + " arguments for " + strconv.Itoa(len(matches)-1) + " matches")
+		return 0, errors.New("got " + strconv.Itoa(len(args)) + " arguments for " + strconv.Itoa(len(matches)-1) + " matches")
 	}
 
 	for i, arg := range args {
@@ -119,10 +119,11 @@ func Scan(re *regexp.Regexp, s string, args ...interface{}) (err error) {
 			continue
 		}
 		if err := parse(matches[i+1], arg); err != nil {
-			return err
+			return 0, err
 		}
+		n++
 	}
-	return err
+	return n, err
 }
 
 type scanner struct {

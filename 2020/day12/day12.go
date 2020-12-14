@@ -34,7 +34,7 @@ func Part1(f io.Reader) (string, error) {
 	for s.Scan() {
 		var dirs string
 		var amount int
-		if err := adventofcode.Scan(rx, s.Text(), &dirs, &amount); err != nil {
+		if _, err := adventofcode.Scan(rx, s.Text(), &dirs, &amount); err != nil {
 			panic(err)
 		}
 		dir := direction(dirs[0])
@@ -120,7 +120,7 @@ func Part2(f io.Reader) (string, error) {
 	for s.Scan() {
 		var dirs string
 		var amount int
-		if err := adventofcode.Scan(rx, s.Text(), &dirs, &amount); err != nil {
+		if _, err := adventofcode.Scan(rx, s.Text(), &dirs, &amount); err != nil {
 			panic(err)
 		}
 		dir := direction(dirs[0])

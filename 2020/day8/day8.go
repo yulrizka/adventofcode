@@ -34,7 +34,7 @@ func isTerminate(lines []string) (success bool, accumulator int64) {
 			op  string
 			arg int64
 		)
-		if err := adventofcode.Scan(rx, lines[i], &op, &arg); err != nil {
+		if _, err := adventofcode.Scan(rx, lines[i], &op, &arg); err != nil {
 			log.Fatal(err)
 		}
 

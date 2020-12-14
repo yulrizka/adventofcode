@@ -38,9 +38,10 @@ func TestScan(t *testing.T) {
 		s    string
 		byts []byte
 	)
-	err := Scan(regexp.MustCompile(`it is (\w+)$`), "it is true", &b)
+	n, err := Scan(regexp.MustCompile(`it is (\w+)$`), "it is true", &b)
 	require.NoError(t, err)
 	require.True(t, b)
+	require.EqualValues(t, n, 1)
 
 	// boolean
 	wantB := true
@@ -92,7 +93,7 @@ func TestScan(t *testing.T) {
 
 func ok(t *testing.T, re *regexp.Regexp, s string, args []interface{}, want []interface{}) {
 	t.Helper()
-	err := Scan(re, s, args...)
+	_, err := Scan(re, s, args...)
 	require.NoError(t, err)
 
 	for i, v := range want {
@@ -153,7 +154,7 @@ func withScan() {
 func withRegex() {
 	var op string
 	var arg int64
-	_ = Scan(rx, text, &op, &arg)
+	_, _ = Scan(rx, text, &op, &arg)
 }
 
 // $ benchstat scan.txt regex.txt
