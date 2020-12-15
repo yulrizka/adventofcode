@@ -4,11 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/yulrizka/adventofcode/pkg/aoc"
-
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/yulrizka/adventofcode/pkg/aoc"
 )
 
 func TestPart1(t *testing.T) {
@@ -42,11 +41,12 @@ func TestPart1(t *testing.T) {
 	require.NoError(t, err)
 	assert.EqualValues(t, "1836", s)
 
-	aoc.Test(t, "input", "", Part1)
+	aoc.Test(t, "input", "276", Part1)
+
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input", "", Part2)
+	aoc.Test(t, "input", "31916", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
