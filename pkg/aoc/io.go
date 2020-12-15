@@ -1,4 +1,4 @@
-package adventofcode
+package aoc
 
 import (
 	"bufio"
@@ -18,4 +18,10 @@ func MustInts(r io.Reader) []int {
 	}
 
 	return lines
+}
+
+func NoError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }

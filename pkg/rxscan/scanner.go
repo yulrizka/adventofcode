@@ -1,4 +1,4 @@
-package adventofcode
+package rxscan
 
 import (
 	"errors"

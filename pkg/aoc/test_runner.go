@@ -1,4 +1,4 @@
-package adventofcode
+package aoc
 
 import (
 	"bytes"

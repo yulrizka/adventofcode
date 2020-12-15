@@ -5,11 +5,11 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/yulrizka/adventofcode"
+	"github.com/yulrizka/adventofcode/pkg/aoc"
 )
 
 func Part1(f io.Reader) (string, error) {
-	ints := adventofcode.MustInts(f)
+	ints := aoc.MustInts(f)
 	ints = append(ints, 0) // outlet jolts
 	sort.Ints(ints)
 	ints = append(ints, ints[len(ints)-1]+3) // device jolts
@@ -26,7 +26,7 @@ func Part1(f io.Reader) (string, error) {
 }
 
 func Part2(r io.Reader) (string, error) {
-	ints := adventofcode.MustInts(r)
+	ints := aoc.MustInts(r)
 	ints = append(ints, 0) // outlet jolts
 	sort.Sort(sort.Reverse(sort.IntSlice(ints)))
 	ints = append([]int{ints[0] + 3}, ints...) //device jolts

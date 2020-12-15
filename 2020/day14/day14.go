@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yulrizka/adventofcode"
+	"github.com/yulrizka/adventofcode/pkg/rxscan"
 )
 
 var (
 	rxMask = regexp.MustCompile(`mask = (.+)`)
-	rxMem  = regexp.MustCompile(`mem\[(\d+)\] = (\d+)`)
+	rxMem  = regexp.MustCompile(`mem\[(\d+)] = (\d+)`)
 )
 
 func Part1(f io.Reader) (string, error) {
@@ -25,7 +25,7 @@ func Part1(f io.Reader) (string, error) {
 	)
 	for s.Scan() {
 		var maskStr string
-		n, err := adventofcode.Scan(rxMask, s.Text(), &maskStr)
+		n, err := rxscan.Scan(rxMask, s.Text(), &maskStr)
 		if err != nil {
 			panic(err)
 		}
@@ -36,7 +36,7 @@ func Part1(f io.Reader) (string, error) {
 
 		// parsing memory assignment
 		var addr, value uint
-		n, err = adventofcode.Scan(rxMem, s.Text(), &addr, &value)
+		n, err = rxscan.Scan(rxMem, s.Text(), &addr, &value)
 		if err != nil || n == 0 {
 			log.Fatalf("error:%v n:%d", err, n)
 		}
@@ -70,7 +70,7 @@ func Part2(f io.Reader) (string, error) {
 	)
 	for s.Scan() {
 		var maskStr string
-		n, err := adventofcode.Scan(rxMask, s.Text(), &maskStr)
+		n, err := rxscan.Scan(rxMask, s.Text(), &maskStr)
 		if err != nil {
 			panic(err)
 		}
@@ -81,7 +81,7 @@ func Part2(f io.Reader) (string, error) {
 
 		// parsing memory assignment
 		var addr, value uint
-		n, err = adventofcode.Scan(rxMem, s.Text(), &addr, &value)
+		n, err = rxscan.Scan(rxMem, s.Text(), &addr, &value)
 		if err != nil || n == 0 {
 			log.Fatalf("error:%v n:%d", err, n)
 		}

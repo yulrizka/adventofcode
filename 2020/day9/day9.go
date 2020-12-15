@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/yulrizka/adventofcode"
+	"github.com/yulrizka/adventofcode/pkg/aoc"
 )
 
 // check if x is result of adding 2 different element of s
@@ -38,7 +38,7 @@ func invalid(lines []int, preamble int) int {
 }
 
 func Part1(f io.Reader) (string, error) {
-	lines := adventofcode.MustInts(f)
+	lines := aoc.MustInts(f)
 
 	v := invalid(lines, 25)
 	if v < 0 {
@@ -49,7 +49,7 @@ func Part1(f io.Reader) (string, error) {
 }
 
 func Part2(f io.Reader) (string, error) {
-	lines := adventofcode.MustInts(f)
+	lines := aoc.MustInts(f)
 
 	wantSum := invalid(lines, 25)
 	if wantSum < 0 {

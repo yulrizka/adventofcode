@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yulrizka/adventofcode"
+	"github.com/yulrizka/adventofcode/pkg/rxscan"
 )
 
 const (
@@ -34,7 +34,7 @@ func isTerminate(lines []string) (success bool, accumulator int64) {
 			op  string
 			arg int64
 		)
-		if _, err := adventofcode.Scan(rx, lines[i], &op, &arg); err != nil {
+		if _, err := rxscan.Scan(rx, lines[i], &op, &arg); err != nil {
 			log.Fatal(err)
 		}
 
