@@ -1,4 +1,4 @@
-package rxscan
+package rxscan_test
 
 import (
 	"fmt"
@@ -8,17 +8,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/stretchr/testify/require"
+	"github.com/yulrizka/adventofcode/pkg/rxscan"
 )
 
 func TestScan(t *testing.T) {
 	var (
 		b bool
 
-		c64  complex64
-		c128 complex128
+		//c64  complex64
+		//c128 complex128
 
 		i   int
 		i8  int8
@@ -35,10 +34,11 @@ func TestScan(t *testing.T) {
 		f32 float32
 		f64 float64
 
-		s    string
-		byts []byte
+		char  byte
+		s     string
+		bytes []byte
 	)
-	n, err := Scan(regexp.MustCompile(`it is (\w+)$`), "it is true", &b)
+	n, err := rxscan.Scan(regexp.MustCompile(`it is (\w+)$`), "it is true", &b)
 	require.NoError(t, err)
 	require.True(t, b)
 	require.EqualValues(t, n, 1)
@@ -50,10 +50,10 @@ func TestScan(t *testing.T) {
 	ok(t, regexp.MustCompile(`it is (\w+)$`), "it is false", []interface{}{&b}, []interface{}{&wantB})
 
 	// complex
-	wantC64 := complex64(3 + 5.5i)
-	ok(t, regexp.MustCompile(`it is (.+)$`), "it is (3.0+5.5i)", []interface{}{&c64}, []interface{}{&wantC64})
-	wantC128 := 3 + 5.5i
-	ok(t, regexp.MustCompile(`it is (.+)$`), "it is (3.0+5.5i)", []interface{}{&c128}, []interface{}{&wantC128})
+	//wantC64 := complex64(3 + 5.5i)
+	//ok(t, regexp.MustCompile(`it is (.+)$`), "it is (3.0+5.5i)", []interface{}{&c64}, []interface{}{&wantC64})
+	//wantC128 := 3 + 5.5i
+	//ok(t, regexp.MustCompile(`it is (.+)$`), "it is (3.0+5.5i)", []interface{}{&c128}, []interface{}{&wantC128})
 
 	// int
 	wantI := 11
@@ -85,15 +85,18 @@ func TestScan(t *testing.T) {
 	wantFloat64 := 0.123456
 	ok(t, regexp.MustCompile(`it is (.+)$`), "it is 0.123456", []interface{}{&f64}, []interface{}{&wantFloat64})
 
+	wantChar := 'b'
+	ok(t, regexp.MustCompile(`it is (.)$`), "it is c", []interface{}{&char}, []interface{}{&wantChar})
+
 	wantS := "some cool text"
 	ok(t, regexp.MustCompile(`it is (.+)$`), "it is some cool text", []interface{}{&s}, []interface{}{&wantS})
-	wantByts := []byte("some cool text")
-	ok(t, regexp.MustCompile(`it is (.+)$`), "it is some cool text", []interface{}{&byts}, []interface{}{&wantByts})
+	wantBytes := []byte("some cool text")
+	ok(t, regexp.MustCompile(`it is (.+)$`), "it is some cool text", []interface{}{&bytes}, []interface{}{&wantBytes})
 }
 
 func ok(t *testing.T, re *regexp.Regexp, s string, args []interface{}, want []interface{}) {
 	t.Helper()
-	_, err := Scan(re, s, args...)
+	_, err := rxscan.Scan(re, s, args...)
 	require.NoError(t, err)
 
 	for i, v := range want {
@@ -101,7 +104,23 @@ func ok(t *testing.T, re *regexp.Regexp, s string, args []interface{}, want []in
 	}
 }
 
-func TestScanAll(t *testing.T) {
+func ExampleScan() {
+	input := "bright white bags contain 9 shiny gold bag."
+	rx := regexp.MustCompile(`([\w ]+) bags contain (\d+) ([\w ]+) bag.`)
+	var (
+		bag1, bag2 string
+		i          int
+	)
+	n, err := rxscan.Scan(rx, input, &bag1, &i, &bag2)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("parsed %d arguments: %s -> (%d) %s", n, bag1, i, bag2)
+	// Output: parsed 3 arguments: bright white -> (9) shiny gold
+}
+
+func ExampleScanner() {
 	input := `light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
 bright white bags contain 1 shiny gold bag.
@@ -112,32 +131,37 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.`
 
+	rx := regexp.MustCompile(`(\d+) ([\w ]+) bag`)
+
 	lines := strings.Split(input, "\n")
-
-	var got [][]interface{}
-
-	rx := regexp.MustCompile(`(\d+) (\w+ \w+) bag`)
 	for _, l := range lines {
-		var count int
-		var color string
-		sc := ScanAll(rx, l)
-		for sc.Scan(&count, &color) {
-			got = append(got, []interface{}{count, color})
+		sc := rxscan.NewScanner(rx, l)
+		for sc.More() {
+			var count int
+			var color string
+			sc.Scan(&count, &color)
+			fmt.Printf("- (%d) %s\n", count, color)
 		}
-		assert.NoError(t, sc.err)
+		if err := sc.Error(); err != nil {
+			panic(err)
+		}
 	}
 
-	want := [][]interface{}{
-		{1, "bright white"}, {2, "muted yellow"},
-		{3, "bright white"}, {4, "muted yellow"},
-		{1, "shiny gold"},
-		{2, "shiny gold"}, {9, "faded blue"},
-		{1, "dark olive"}, {2, "vibrant plum"},
-		{3, "faded blue"}, {4, "dotted black"},
-		{5, "faded blue"}, {6, "dotted black"},
-	}
+	// Output:
+	//- (1) bright white
+	//- (2) muted yellow
+	//- (3) bright white
+	//- (4) muted yellow
+	//- (1) shiny gold
+	//- (2) shiny gold
+	//- (9) faded blue
+	//- (1) dark olive
+	//- (2) vibrant plum
+	//- (3) faded blue
+	//- (4) dotted black
+	//- (5) faded blue
+	//- (6) dotted black
 
-	assert.EqualValues(t, want, got)
 }
 
 var (
@@ -154,7 +178,7 @@ func withScan() {
 func withRegex() {
 	var op string
 	var arg int64
-	_, _ = Scan(rx, text, &op, &arg)
+	_, _ = rxscan.Scan(rx, text, &op, &arg)
 }
 
 // $ benchstat scan.txt regex.txt

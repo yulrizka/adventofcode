@@ -142,17 +142,17 @@ func (s *scanner) NumParsed() int {
 	return s.numParsed
 }
 
-func ScanAll(re *regexp.Regexp, s string) *scanner {
+func NewScanner(re *regexp.Regexp, s string) *scanner {
 	return &scanner{
 		matches: re.FindAllStringSubmatch(s, -1),
 	}
 }
 
-func (s *scanner) Scan(args ...interface{}) bool {
-	if s.err != nil || s.i >= len(s.matches) {
-		return false
-	}
+func (s *scanner) More() bool {
+	return s.err == nil && s.i < len(s.matches)
+}
 
+func (s *scanner) Scan(args ...interface{}) bool {
 	m := s.matches[s.i]
 	if len(s.args) > len(m)-1 {
 		s.err = errors.New("got " + strconv.Itoa(len(s.args)) + " arguments for " + strconv.Itoa(len(m)-1) + " matches")
