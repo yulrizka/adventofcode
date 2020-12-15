@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/yulrizka/adventofcode/pkg/rxscan"
+	"github.com/yulrizka/rxscan"
 )
 
 type direction byte

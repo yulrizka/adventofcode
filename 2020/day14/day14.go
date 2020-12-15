@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yulrizka/adventofcode/pkg/rxscan"
+	"github.com/yulrizka/rxscan"
 )
 
 var (
