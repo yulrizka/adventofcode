@@ -7,11 +7,11 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	aoc.Test(t, "input", "", Part1)
+	aoc.Test(t, "input", "29019", Part1)
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input", "", Part2)
+	aoc.Test(t, "input", "517827547723", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
