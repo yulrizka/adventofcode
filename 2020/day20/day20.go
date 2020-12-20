@@ -1,3 +1,4 @@
+// The ugliest code for this aoc so far but I did not give up!
 package day20
 
 import (
@@ -22,11 +23,174 @@ func Part1(f io.Reader) (string, error) {
 	return strconv.Itoa(mul), nil
 }
 
+// Part2 assemble the pieces, clean up border and find the monster
 func Part2(f io.Reader) (string, error) {
-	//tiles := parse(f)
-	//corners, edgeMatches := getCorners(tiles)
+	tiles := parse(f)
+	corners, edgeMatches := getCorners(tiles)
 
-	return "", nil
+	// pick a corner and
+	corner := corners[0]
+	m := map[*tile]struct{}{}
+	for _, t := range tiles {
+		if t == corner {
+			continue
+		}
+		m[t] = struct{}{}
+	}
+	picture := [][]*tile{
+		{corner},
+	}
+
+	// align orientation so that top and left has no match
+	for len(edgeMatches[corner.top()]) > 1 {
+		corner.rotateRight()
+	}
+	for len(edgeMatches[corner.left()]) > 1 {
+		corner.flip()
+	}
+	picture = assemble(picture, m, 0, 0)
+
+	for _, row := range picture {
+		for _, t := range row {
+			t.cleanBorder()
+		}
+	}
+
+	var clean []string
+	for _, row := range picture {
+		var c []string
+		for i, t := range row {
+			if i == 0 {
+				c = t.s
+				continue
+			}
+			c = combine(c, t.s)
+		}
+		clean = append(clean, c...)
+	}
+
+	monsterStr := `                  # 
+#    ##    ##    ###
+ #  #  #  #  #  #   `
+	monster := strings.Split(monsterStr, "\n")
+
+	var sum int
+	clean = flip(clean)
+	for sum == 0 {
+		for k := 0; k < 4; k++ {
+			clean = rotateRight(clean)
+			for i := 0; i < 96; i++ {
+				for j := 0; j < 96; j++ {
+					if monsterExists(monster, clean, i, j) {
+						sum++
+					}
+				}
+			}
+		}
+	}
+
+	fill := strings.Count(strings.Join(clean, "\n"), "#")
+	ans := fill - (sum * strings.Count(monsterStr, "#"))
+
+	return strconv.Itoa(ans), nil
+}
+
+func monsterExists(monster []string, clean []string, i int, j int) bool {
+	// y does not match
+	if len(clean)-i < len(monster) {
+		return false
+	}
+
+	// x does not match
+	if len(clean[0])-j < len(monster[0]) {
+		return false
+	}
+
+	for row, line := range monster {
+		for col, v := range line {
+			if v != '#' {
+				continue
+			}
+			if clean[i+row][j+col] != '#' {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+// assemble picture by starting from the top row, find piece that match the right side.
+// if there are no pieces matched the right side, start the next row from the left which
+// the top should match with the bottom part of the pieces above
+func assemble(picture [][]*tile, tiles map[*tile]struct{}, row int, col int) [][]*tile {
+	// continue
+	for len(tiles) != 0 {
+		// find to the right
+		ref := picture[row][col]
+		found := false
+
+	next:
+		for t := range tiles {
+			for i := 0; i < 4; i++ {
+				t.rotateRight()
+				if matchLeftRight(ref, t) {
+					picture[row] = append(picture[row], t)
+					delete(tiles, t)
+					found = true
+					break next
+				}
+			}
+
+			t.flip()
+			for i := 0; i < 4; i++ {
+				t.rotateRight()
+				if matchLeftRight(ref, t) {
+					picture[row] = append(picture[row], t)
+					delete(tiles, t)
+					found = true
+					break next
+				}
+			}
+		}
+		if found {
+			col++
+		} else {
+			// to pieces match to the right, start the next row which top part matches the pieces above
+			ref = picture[row][0]
+			row += 1
+			col = 0
+			picture = append(picture, []*tile{})
+
+		next2:
+			for t := range tiles {
+				for i := 0; i < 4; i++ {
+					t.rotateRight()
+					if matchTopBottom(ref, t) {
+						picture[row] = append(picture[row], t)
+						delete(tiles, t)
+						found = true
+						break next2
+					}
+				}
+
+				t.flip()
+				for i := 0; i < 4; i++ {
+					t.rotateRight()
+					if matchTopBottom(ref, t) {
+						picture[row] = append(picture[row], t)
+						delete(tiles, t)
+						found = true
+						break next2
+					}
+				}
+			}
+			if !found {
+				panic("should not be here")
+			}
+		}
+	}
+	return picture
 }
 
 type tile struct {
@@ -34,6 +198,11 @@ type tile struct {
 	s  []string
 }
 
+func (t *tile) load(s string) {
+	t.s = strings.Split(s, "\n")
+}
+
+// edges return the pieces edges including when it's flipped
 func (t *tile) edges() []string {
 	var top, bottom, left, right []byte
 	for i := 0; i < 10; i++ {
@@ -54,28 +223,104 @@ func (t *tile) edges() []string {
 	}
 }
 
-func (t *tile) rotateRight() tile {
-	newTile := tile{
-		id: t.id,
-	}
-	for i := 0; i < 10; i++ {
-		var b bytes.Buffer
-		for j := 9; j >= 0; j-- {
-			b.WriteByte(t.s[i][j])
-		}
-		newTile.s = append(newTile.s, b.String())
-	}
-	return newTile
+func (t *tile) bottom() string {
+	return reverse(t.s[9])
 }
 
-func (t *tile) flip() tile {
-	newTile := tile{
-		id: t.id,
+func (t *tile) top() string {
+	return t.s[0]
+}
+
+func (t *tile) right() string {
+	var b bytes.Buffer
+	for i := 0; i < 10; i++ {
+		b.WriteByte(t.s[i][9])
 	}
-	for _, s := range t.s {
-		newTile.s = append(newTile.s, reverse(s))
+	return b.String()
+}
+
+func (t *tile) left() string {
+	var b bytes.Buffer
+	for i := 9; i >= 0; i-- {
+		b.WriteByte(t.s[i][0])
 	}
-	return newTile
+	return b.String()
+}
+
+func (t *tile) rotateRight() {
+	t.s = rotateRight(t.s)
+}
+
+func rotateRight(a []string) []string {
+	var s []string
+	for i := 0; i < len(a[0]); i++ {
+		var b bytes.Buffer
+		for j := len(a) - 1; j >= 0; j-- {
+			b.WriteByte(a[j][i])
+		}
+		s = append(s, b.String())
+	}
+	return s
+}
+
+func (t *tile) flip() {
+	t.s = flip(t.s)
+}
+
+func flip(a []string) []string {
+	var n []string
+	for _, s := range a {
+		n = append(n, reverse(s))
+	}
+	return n
+}
+
+func (t *tile) print() {
+	for _, v := range t.s {
+		fmt.Printf("%s\n", v)
+	}
+	fmt.Printf("\n")
+}
+
+// cleanBorder removes outer part of the pieces
+func (t *tile) cleanBorder() {
+	var n []string
+	for i, s := range t.s {
+		if i == 0 || i == 9 {
+			continue
+		}
+		n = append(n, s[1:9])
+	}
+	t.s = n
+}
+
+// matchLeftRight returns true if right side of left pieces matches with left side of right piece
+func matchLeftRight(l *tile, r *tile) bool {
+	for i := 0; i < 10; i++ {
+		if l.s[i][9] != r.s[i][0] {
+			return false
+		}
+	}
+	return true
+}
+
+// matchTopBottom returns true if top part of bottom pieces match the bottom part of above piece
+func matchTopBottom(t *tile, b *tile) bool {
+	for i := 0; i < 10; i++ {
+		if t.s[9][i] != b.s[0][i] {
+			return false
+		}
+	}
+	return true
+}
+
+// combine martix by appending r to l for each row
+func combine(l []string, r []string) []string {
+	var n []string
+	for i := 0; i < len(l); i++ {
+		n = append(n, l[i]+r[i])
+	}
+	return n
 }
 
 func reverse(str string) (result string) {
@@ -85,6 +330,7 @@ func reverse(str string) (result string) {
 	return
 }
 
+// getCorners by mapping and count each edge that match with each other
 func getCorners(tiles []*tile) ([]*tile, map[string][]*tile) {
 	// map and count matching edges
 	edgesMatch := map[string][]*tile{}
