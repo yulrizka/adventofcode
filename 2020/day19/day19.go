@@ -48,8 +48,75 @@ func Part2(f io.Reader) (string, error) {
 }
 
 type node struct {
-	el [][]int
-	v  []string
+	el []*node
+	v  string
+}
+
+func parse(f io.Reader) (rules map[int]*node, input []string) {
+	rules = make(map[int]*node)
+
+	s := bufio.NewScanner(f)
+	for s.Scan() {
+		if s.Text() == "" {
+			break // line separator
+		}
+		text := s.Text()
+		i := strings.Index(text, ":")
+		idStr, rest := text[:i], text[i+2:]
+		id, err := strconv.Atoi(idStr)
+		aoc.NoError(err)
+
+		var n *node
+		n, ok := rules[id]
+		if !ok {
+			n = &node{}
+			rules[id] = n
+		}
+
+		if strings.Contains(rest, "|") {
+			for _, tuple := range strings.Split(rest, "|") {
+				for _, f := range strings.Fields(tuple) {
+					v, err := strconv.Atoi(f)
+					aoc.NoError(err)
+					child, ok := rules[v]
+					if !ok {
+						child = &node{}
+						rules[v] = child
+					}
+					n.el = append(n.el, child)
+				}
+			}
+			n.el = elements
+			rules[id] = n
+			continue
+		}
+		if rest == `"a"` {
+			rules[id] = &node{v: "a"}
+			continue
+		}
+		if rest == `"b"` {
+			rules[id] = &node{v: "b"}
+			continue
+		}
+		for _, f := range strings.Fields(rest) {
+			v, err := strconv.Atoi(f)
+			aoc.NoError(err)
+			child, ok := rules[v]
+			if !ok {
+				child = &node{}
+				rules[v] = child
+			}
+			n.el = append(n.el, child)
+
+		}
+		rules[id] = &node{el: elements}
+	}
+
+	// parse text
+	for s.Scan() {
+		input = append(input, s.Text())
+	}
+	return
 }
 
 func walk(n *node, rules map[int]*node) []string {
@@ -76,57 +143,4 @@ func walk(n *node, rules map[int]*node) []string {
 		n.v = append(n.v, ans...)
 	}
 	return n.v
-}
-
-func parse(f io.Reader) (rules map[int]*node, input []string) {
-	rules = make(map[int]*node)
-	s := bufio.NewScanner(f)
-	for s.Scan() {
-		if s.Text() == "" {
-			break // line separator
-		}
-		text := s.Text()
-		i := strings.Index(text, ":")
-		idStr, rest := text[:i], text[i+2:]
-		id, err := strconv.Atoi(idStr)
-		aoc.NoError(err)
-
-		n := node{}
-		if strings.Contains(rest, "|") {
-			var elements [][]int
-			for _, tuple := range strings.Split(rest, "|") {
-				var element []int
-				for _, f := range strings.Fields(tuple) {
-					v, err := strconv.Atoi(f)
-					aoc.NoError(err)
-					element = append(element, v)
-				}
-				elements = append(elements, element)
-			}
-			n.el = elements
-			rules[id] = &n
-			continue
-		}
-		if rest == `"a"` {
-			rules[id] = &node{v: []string{"a"}}
-			continue
-		}
-		if rest == `"b"` {
-			rules[id] = &node{v: []string{"b"}}
-			continue
-		}
-		var element []int
-		for _, f := range strings.Fields(rest) {
-			v, err := strconv.Atoi(f)
-			aoc.NoError(err)
-			element = append(element, v)
-		}
-		rules[id] = &node{el: [][]int{element}}
-	}
-
-	// parse text
-	for s.Scan() {
-		input = append(input, s.Text())
-	}
-	return
 }
