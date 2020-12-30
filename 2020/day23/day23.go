@@ -10,89 +10,116 @@ import (
 )
 
 func Part1(f io.Reader) (string, error) {
-	raw, err := ioutil.ReadAll(f)
-	aoc.NoError(err)
-
-	var cups []byte
-	for _, b := range raw {
-		if b == '\n' {
-			continue
-		}
-		i, err := strconv.Atoi(string(b))
-		aoc.NoError(err)
-		cups = append(cups, byte(i))
-	}
-	if cups == nil {
-		panic("cups is nil")
-	}
-
-	var cupIndex int
-
-	for n := 0; n < 100; n++ {
-		cupValue := cups[cupIndex]
-		var pickup []byte
-
-		// pickup 3 cups next to ci
-		var ci = cupIndex + 1
-		for i := 1; i <= 3; i++ {
-			if ci >= len(cups) {
-				pickup = append(pickup, cups[0])
-				cups = cups[1:]
-				continue
-			}
-			pickup = append(pickup, cups[ci])
-			cups = append(cups[:ci], cups[ci+1:]...)
-		}
-
-		// find destination
-		dest := cupValue - 1
-		for {
-			if dest == 0 {
-				dest = 9
-			}
-			if pos := bytes.IndexByte(pickup, dest); pos == -1 {
-				break // found
-			}
-			dest--
-		}
-		ix := bytes.IndexByte(cups, dest)
-		if ix == -1 {
-			panic("not found")
-		}
-
-		// copy
-		head := []byte(string(cups[:ix+1]))
-		tail := []byte(string(cups[ix+1:]))
-
-		newCups := make([]byte, 0, len(cups))
-		newCups = append(head, pickup...)
-		newCups = append(newCups, tail...)
-		cups = newCups
-
-		cupIndex = bytes.IndexByte(cups, cupValue)
-		if cupIndex == len(cups)-1 {
-			cupIndex = 0
-		} else {
-			cupIndex++
-		}
-	}
-
-	// rotate until 1 is in the front
-	for cups[0] != 1 {
-		cups = append(cups[1:], cups[0])
-	}
+	root, index, max := parseNode(f, 9)
+	simulate(root, index, max, 100)
+	one := index[1]
+	c := one.next
 
 	var b bytes.Buffer
-	for i, v := range cups {
-		if i == 0 {
-			continue // skip 1
-		}
-		b.WriteString(strconv.Itoa(int(v)))
+	for c != one {
+		b.WriteString(strconv.Itoa(c.v))
+		c = c.next
 	}
 
 	return b.String(), nil
 }
 
 func Part2(f io.Reader) (string, error) {
-	return "", nil
+	root, index, max := parseNode(f, 1000_000)
+	simulate(root, index, max, 10_000_000)
+
+	one := index[1]
+	sum := one.next.v * one.next.next.v
+	return strconv.Itoa(sum), nil
+}
+
+type node struct {
+	v    int
+	next *node
+}
+
+// parseNode construct a linked list node, index to each node and max number
+func parseNode(f io.Reader, addTo int) (*node, map[int]*node, int) {
+	root := new(node)
+
+	var max int
+
+	index := map[int]*node{}
+
+	raw, err := ioutil.ReadAll(f)
+	aoc.NoError(err)
+
+	c := root
+	first := true
+	for _, b := range raw {
+		if b == '\n' {
+			continue
+		}
+		i, err := strconv.Atoi(string(b))
+		aoc.NoError(err)
+
+		if max < i {
+			max = i
+		}
+
+		if first {
+			c.v = i
+			index[i] = c
+			first = false
+		} else {
+			c.next = new(node)
+			c.next.v = i
+			c = c.next
+			index[i] = c
+		}
+	}
+
+	for v := max + 1; v <= addTo; v++ {
+		max = v
+		c.next = new(node)
+		c.next.v = v
+		c = c.next
+		index[v] = c
+	}
+
+	// close the loop
+	c.next = root
+
+	return root, index, max
+}
+
+func simulate(root *node, index map[int]*node, max int, iteration int) {
+	cup := root
+	for n := 0; n < iteration; n++ {
+
+		// pickup 3 cups next to the current cup
+		var start, end *node
+		start = cup.next
+		end = start.next.next
+
+		// remove the picked-up cup from the chain
+		cup.next = end.next
+
+		// find the destination and repeat util it picks up cup that are not part of the picked-up cup earlier
+		pickup := map[int]bool{start.v: true, start.next.v: true, end.v: true}
+		destValue := cup.v - 1
+		for {
+			if destValue <= 0 {
+				destValue = max // wrap
+			}
+			if !pickup[destValue] {
+				break // found
+			}
+			destValue--
+		}
+
+		dest := index[destValue]
+
+		// stitch it again
+		temp := dest.next
+		dest.next = start
+		end.next = temp
+
+		cup = cup.next
+	}
 }
