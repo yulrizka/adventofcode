@@ -10,8 +10,11 @@ import (
 )
 
 func Part1(f io.Reader) (string, error) {
-	root, index, max := parseNode(f, 9)
-	simulate(root, index, max, 100)
+	max := 9
+	root, index := parseNode(f, max)
+
+	iteration := 100
+	simulate(root, index, max, iteration)
 	one := index[1]
 	c := one.next
 
@@ -25,8 +28,11 @@ func Part1(f io.Reader) (string, error) {
 }
 
 func Part2(f io.Reader) (string, error) {
-	root, index, max := parseNode(f, 1000_000)
-	simulate(root, index, max, 10_000_000)
+	max := 1000_000
+	root, index := parseNode(f, max)
+
+	iteration := 10_000_000
+	simulate(root, index, max, iteration)
 
 	one := index[1]
 	sum := one.next.v * one.next.next.v
@@ -39,10 +45,8 @@ type node struct {
 }
 
 // parseNode construct a linked list node, index to each node and max number
-func parseNode(f io.Reader, addTo int) (*node, map[int]*node, int) {
+func parseNode(f io.Reader, max int) (*node, map[int]*node) {
 	root := new(node)
-
-	var max int
 
 	index := map[int]*node{}
 
@@ -58,10 +62,6 @@ func parseNode(f io.Reader, addTo int) (*node, map[int]*node, int) {
 		i, err := strconv.Atoi(string(b))
 		aoc.NoError(err)
 
-		if max < i {
-			max = i
-		}
-
 		if first {
 			c.v = i
 			index[i] = c
@@ -74,8 +74,7 @@ func parseNode(f io.Reader, addTo int) (*node, map[int]*node, int) {
 		}
 	}
 
-	for v := max + 1; v <= addTo; v++ {
-		max = v
+	for v := len(index) + 1; v <= max; v++ {
 		c.next = new(node)
 		c.next.v = v
 		c = c.next
@@ -85,7 +84,7 @@ func parseNode(f io.Reader, addTo int) (*node, map[int]*node, int) {
 	// close the loop
 	c.next = root
 
-	return root, index, max
+	return root, index
 }
 
 func simulate(root *node, index map[int]*node, max int, iteration int) {
@@ -101,16 +100,15 @@ func simulate(root *node, index map[int]*node, max int, iteration int) {
 		cup.next = end.next
 
 		// find the destination and repeat util it picks up cup that are not part of the picked-up cup earlier
-		pickup := map[int]bool{start.v: true, start.next.v: true, end.v: true}
-		destValue := cup.v - 1
+		destValue := cup.v
 		for {
-			if destValue <= 0 {
+			destValue--
+			if destValue == 0 {
 				destValue = max // wrap
 			}
-			if !pickup[destValue] {
-				break // found
+			if destValue != start.v && destValue != start.next.v && destValue != end.v {
+				break
 			}
-			destValue--
 		}
 
 		dest := index[destValue]
