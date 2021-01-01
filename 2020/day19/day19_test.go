@@ -11,7 +11,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input2", "", Part2)
+	aoc.Test(t, "input2", "414", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {

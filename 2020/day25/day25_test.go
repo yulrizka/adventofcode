@@ -1,4 +1,4 @@
-package day21
+package day25
 
 import (
 	"testing"
@@ -7,11 +7,11 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	aoc.Test(t, "input", "2075", Part1)
+	aoc.Test(t, "input", "2679568", Part1)
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input", "zfcqk,mdtvbb,ggdbl,frpvd,mgczn,zsfzq,kdqls,kktsjbh", Part2)
+	aoc.Test(t, "input", "", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
