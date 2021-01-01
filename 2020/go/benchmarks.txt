@@ -1,0 +1,635 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day1
+BenchmarkPart1-16    	   62757	     18103 ns/op
+BenchmarkPart1-16    	   66476	     17906 ns/op
+BenchmarkPart1-16    	   66374	     17920 ns/op
+BenchmarkPart1-16    	   64402	     17781 ns/op
+BenchmarkPart1-16    	   67076	     17631 ns/op
+BenchmarkPart1-16    	   64113	     17770 ns/op
+BenchmarkPart1-16    	   67814	     18205 ns/op
+BenchmarkPart1-16    	   62001	     19825 ns/op
+BenchmarkPart1-16    	   66211	     17961 ns/op
+BenchmarkPart1-16    	   68782	     17751 ns/op
+BenchmarkPart2-16    	     880	   1367665 ns/op
+BenchmarkPart2-16    	     883	   1365607 ns/op
+BenchmarkPart2-16    	     877	   1369841 ns/op
+BenchmarkPart2-16    	     879	   1357601 ns/op
+BenchmarkPart2-16    	     877	   1376686 ns/op
+BenchmarkPart2-16    	     868	   1375350 ns/op
+BenchmarkPart2-16    	     866	   1377223 ns/op
+BenchmarkPart2-16    	     868	   1366319 ns/op
+BenchmarkPart2-16    	     859	   1408698 ns/op
+BenchmarkPart2-16    	     835	   1386221 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day1	27.328s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day10
+BenchmarkPart1-16    	  147884	      7484 ns/op
+BenchmarkPart1-16    	  162669	      7497 ns/op
+BenchmarkPart1-16    	  158923	      7604 ns/op
+BenchmarkPart1-16    	  156710	      7494 ns/op
+BenchmarkPart1-16    	  162153	      7505 ns/op
+BenchmarkPart1-16    	  157734	      7445 ns/op
+BenchmarkPart1-16    	  160581	      7436 ns/op
+BenchmarkPart1-16    	  155496	      7463 ns/op
+BenchmarkPart1-16    	  161755	      7510 ns/op
+BenchmarkPart1-16    	  162348	      7534 ns/op
+BenchmarkPart2-16    	   69997	     16831 ns/op
+BenchmarkPart2-16    	   71917	     17191 ns/op
+BenchmarkPart2-16    	   70291	     16878 ns/op
+BenchmarkPart2-16    	   70521	     17122 ns/op
+BenchmarkPart2-16    	   67322	     16637 ns/op
+BenchmarkPart2-16    	   71636	     16862 ns/op
+BenchmarkPart2-16    	   71259	     16868 ns/op
+BenchmarkPart2-16    	   67519	     16832 ns/op
+BenchmarkPart2-16    	   68674	     18173 ns/op
+BenchmarkPart2-16    	   61110	     18204 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day10	26.471s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day11
+BenchmarkPart1-16    	       6	 195541062 ns/op
+BenchmarkPart1-16    	       6	 195025390 ns/op
+BenchmarkPart1-16    	       6	 195792647 ns/op
+BenchmarkPart1-16    	       5	 214773486 ns/op
+BenchmarkPart1-16    	       5	 216075817 ns/op
+BenchmarkPart1-16    	       5	 244298750 ns/op
+BenchmarkPart1-16    	       5	 204755907 ns/op
+BenchmarkPart1-16    	       5	 210189258 ns/op
+BenchmarkPart1-16    	       6	 191682953 ns/op
+BenchmarkPart1-16    	       6	 191649310 ns/op
+BenchmarkPart2-16    	       4	 276323760 ns/op
+BenchmarkPart2-16    	       4	 273992123 ns/op
+BenchmarkPart2-16    	       4	 270712880 ns/op
+BenchmarkPart2-16    	       4	 275802260 ns/op
+BenchmarkPart2-16    	       4	 272714391 ns/op
+BenchmarkPart2-16    	       4	 268495372 ns/op
+BenchmarkPart2-16    	       4	 284179272 ns/op
+BenchmarkPart2-16    	       4	 273129965 ns/op
+BenchmarkPart2-16    	       4	 271569244 ns/op
+BenchmarkPart2-16    	       4	 292701798 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day11	42.384s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day12
+BenchmarkPart1-16    	    3907	    279864 ns/op
+BenchmarkPart1-16    	    4434	    282279 ns/op
+BenchmarkPart1-16    	    4129	    285123 ns/op
+BenchmarkPart1-16    	    3868	    279352 ns/op
+BenchmarkPart1-16    	    4206	    270885 ns/op
+BenchmarkPart1-16    	    4582	    275665 ns/op
+BenchmarkPart1-16    	    4388	    265355 ns/op
+BenchmarkPart1-16    	    4221	    264802 ns/op
+BenchmarkPart1-16    	    4486	    267083 ns/op
+BenchmarkPart1-16    	    4467	    265784 ns/op
+BenchmarkPart2-16    	    4605	    253601 ns/op
+BenchmarkPart2-16    	    4140	    250481 ns/op
+BenchmarkPart2-16    	    4582	    255297 ns/op
+BenchmarkPart2-16    	    4546	    258882 ns/op
+BenchmarkPart2-16    	    4593	    253148 ns/op
+BenchmarkPart2-16    	    4668	    255914 ns/op
+BenchmarkPart2-16    	    4676	    254681 ns/op
+BenchmarkPart2-16    	    4582	    253616 ns/op
+BenchmarkPart2-16    	    4761	    253765 ns/op
+BenchmarkPart2-16    	    4676	    253316 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day12	24.128s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day13
+BenchmarkPart1-16    	  327159	      3147 ns/op
+BenchmarkPart1-16    	  382839	      3093 ns/op
+BenchmarkPart1-16    	  368262	      3118 ns/op
+BenchmarkPart1-16    	  382220	      3137 ns/op
+BenchmarkPart1-16    	  369499	      3112 ns/op
+BenchmarkPart1-16    	  388773	      3146 ns/op
+BenchmarkPart1-16    	  385545	      3138 ns/op
+BenchmarkPart1-16    	  388647	      3168 ns/op
+BenchmarkPart1-16    	  378990	      3153 ns/op
+BenchmarkPart1-16    	  373105	      3159 ns/op
+BenchmarkPart2-16    	  129222	      8869 ns/op
+BenchmarkPart2-16    	  136434	      8808 ns/op
+BenchmarkPart2-16    	  139075	      8757 ns/op
+BenchmarkPart2-16    	  136273	      8653 ns/op
+BenchmarkPart2-16    	  132685	      8754 ns/op
+BenchmarkPart2-16    	  138406	      8758 ns/op
+BenchmarkPart2-16    	  134840	      8778 ns/op
+BenchmarkPart2-16    	  137889	      8776 ns/op
+BenchmarkPart2-16    	  136243	      8691 ns/op
+BenchmarkPart2-16    	  134484	      8887 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day13	25.079s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day14
+BenchmarkPart1-16    	    2288	    453471 ns/op
+BenchmarkPart1-16    	    2653	    459337 ns/op
+BenchmarkPart1-16    	    2451	    459361 ns/op
+BenchmarkPart1-16    	    2617	    456994 ns/op
+BenchmarkPart1-16    	    2314	    464913 ns/op
+BenchmarkPart1-16    	    2653	    457725 ns/op
+BenchmarkPart1-16    	    2613	    448664 ns/op
+BenchmarkPart1-16    	    2594	    447142 ns/op
+BenchmarkPart1-16    	    2686	    459281 ns/op
+BenchmarkPart1-16    	    2701	    445754 ns/op
+BenchmarkPart2-16    	      54	  20462458 ns/op
+BenchmarkPart2-16    	      50	  20719682 ns/op
+BenchmarkPart2-16    	      57	  20523609 ns/op
+BenchmarkPart2-16    	      57	  20690660 ns/op
+BenchmarkPart2-16    	      52	  21368372 ns/op
+BenchmarkPart2-16    	      56	  20659646 ns/op
+BenchmarkPart2-16    	      52	  21322603 ns/op
+BenchmarkPart2-16    	      57	  20827896 ns/op
+BenchmarkPart2-16    	      51	  21217754 ns/op
+BenchmarkPart2-16    	      51	  21060507 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day14	24.709s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day15
+BenchmarkPart1-16    	   15816	     76507 ns/op
+BenchmarkPart1-16    	   15099	     75852 ns/op
+BenchmarkPart1-16    	   15334	     77184 ns/op
+BenchmarkPart1-16    	   15886	     75119 ns/op
+BenchmarkPart1-16    	   15946	     75067 ns/op
+BenchmarkPart1-16    	   16000	     75865 ns/op
+BenchmarkPart1-16    	   15910	     76324 ns/op
+BenchmarkPart1-16    	   15730	     75879 ns/op
+BenchmarkPart1-16    	   15469	     76373 ns/op
+BenchmarkPart1-16    	   16196	     75361 ns/op
+BenchmarkPart2-16    	       1	2487710897 ns/op
+BenchmarkPart2-16    	       1	2170740149 ns/op
+BenchmarkPart2-16    	       1	2116439531 ns/op
+BenchmarkPart2-16    	       1	2047017294 ns/op
+BenchmarkPart2-16    	       1	2074872734 ns/op
+BenchmarkPart2-16    	       1	2119641492 ns/op
+BenchmarkPart2-16    	       1	2088676092 ns/op
+BenchmarkPart2-16    	       1	2245816667 ns/op
+BenchmarkPart2-16    	       1	2268765829 ns/op
+BenchmarkPart2-16    	       1	2294920606 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day15	41.850s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day16
+BenchmarkPart1-16    	    1641	    690392 ns/op
+BenchmarkPart1-16    	    1740	    632536 ns/op
+BenchmarkPart1-16    	    2090	    578835 ns/op
+BenchmarkPart1-16    	    2076	    583333 ns/op
+BenchmarkPart1-16    	    2110	    584790 ns/op
+BenchmarkPart1-16    	    1975	    577635 ns/op
+BenchmarkPart1-16    	    2115	    603868 ns/op
+BenchmarkPart1-16    	    1965	    576463 ns/op
+BenchmarkPart1-16    	    2074	    591662 ns/op
+BenchmarkPart1-16    	    2083	    581140 ns/op
+BenchmarkPart2-16    	     559	   2049813 ns/op
+BenchmarkPart2-16    	     594	   2094060 ns/op
+BenchmarkPart2-16    	     580	   2054493 ns/op
+BenchmarkPart2-16    	     591	   2036484 ns/op
+BenchmarkPart2-16    	     576	   2066253 ns/op
+BenchmarkPart2-16    	     564	   2032873 ns/op
+BenchmarkPart2-16    	     591	   2064326 ns/op
+BenchmarkPart2-16    	     590	   2138363 ns/op
+BenchmarkPart2-16    	     589	   2063954 ns/op
+BenchmarkPart2-16    	     585	   2038178 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day16	26.789s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day17
+BenchmarkPart1-16    	      36	  28723003 ns/op
+BenchmarkPart1-16    	      42	  28437521 ns/op
+BenchmarkPart1-16    	      43	  28298067 ns/op
+BenchmarkPart1-16    	      40	  28289658 ns/op
+BenchmarkPart1-16    	      40	  28718834 ns/op
+BenchmarkPart1-16    	      43	  28188974 ns/op
+BenchmarkPart1-16    	      38	  28490952 ns/op
+BenchmarkPart1-16    	      40	  28043308 ns/op
+BenchmarkPart1-16    	      39	  28995833 ns/op
+BenchmarkPart1-16    	      39	  28774274 ns/op
+BenchmarkPart2-16    	       1	1037262383 ns/op
+BenchmarkPart2-16    	       2	1025845980 ns/op
+BenchmarkPart2-16    	       1	1013374685 ns/op
+BenchmarkPart2-16    	       1	1039653529 ns/op
+BenchmarkPart2-16    	       1	1035046769 ns/op
+BenchmarkPart2-16    	       1	1019249914 ns/op
+BenchmarkPart2-16    	       1	1008088793 ns/op
+BenchmarkPart2-16    	       1	1080913111 ns/op
+BenchmarkPart2-16    	       1	1043022219 ns/op
+BenchmarkPart2-16    	       2	 998080470 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day17	26.212s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day18
+BenchmarkPart1-16    	    1432	    831811 ns/op
+BenchmarkPart1-16    	    1434	    842916 ns/op
+BenchmarkPart1-16    	    1399	    851512 ns/op
+BenchmarkPart1-16    	    1411	    847451 ns/op
+BenchmarkPart1-16    	    1443	    838490 ns/op
+BenchmarkPart1-16    	    1413	    846347 ns/op
+BenchmarkPart1-16    	    1411	    839086 ns/op
+BenchmarkPart1-16    	    1400	    845312 ns/op
+BenchmarkPart1-16    	    1432	    852018 ns/op
+BenchmarkPart1-16    	    1389	    838232 ns/op
+BenchmarkPart2-16    	    1390	    857428 ns/op
+BenchmarkPart2-16    	    1411	    845347 ns/op
+BenchmarkPart2-16    	    1330	    844169 ns/op
+BenchmarkPart2-16    	    1335	    847005 ns/op
+BenchmarkPart2-16    	    1393	    866457 ns/op
+BenchmarkPart2-16    	    1353	    858485 ns/op
+BenchmarkPart2-16    	    1422	    851082 ns/op
+BenchmarkPart2-16    	    1396	    849276 ns/op
+BenchmarkPart2-16    	    1389	    850793 ns/op
+BenchmarkPart2-16    	    1380	    850335 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day18	26.636s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day19
+BenchmarkPart1-16    	     126	   9633012 ns/op
+BenchmarkPart1-16    	     124	   9563536 ns/op
+BenchmarkPart1-16    	     127	   9387474 ns/op
+BenchmarkPart1-16    	     123	   9470778 ns/op
+BenchmarkPart1-16    	     127	   9516258 ns/op
+BenchmarkPart1-16    	     126	   9528339 ns/op
+BenchmarkPart1-16    	     127	   9485400 ns/op
+BenchmarkPart1-16    	     127	   9381087 ns/op
+BenchmarkPart1-16    	     126	   9506662 ns/op
+BenchmarkPart1-16    	     127	   9578412 ns/op
+BenchmarkPart2-16    	     126	   9531587 ns/op
+BenchmarkPart2-16    	     121	   9634660 ns/op
+BenchmarkPart2-16    	     126	   9462676 ns/op
+BenchmarkPart2-16    	     124	   9427151 ns/op
+BenchmarkPart2-16    	     100	  10004875 ns/op
+BenchmarkPart2-16    	     127	   9586910 ns/op
+BenchmarkPart2-16    	     124	   9918322 ns/op
+BenchmarkPart2-16    	     126	   9528516 ns/op
+BenchmarkPart2-16    	     126	   9965817 ns/op
+BenchmarkPart2-16    	     100	  10513244 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day19	41.165s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day2
+BenchmarkPart1-16    	    1732	    630524 ns/op
+BenchmarkPart1-16    	    1867	    617303 ns/op
+BenchmarkPart1-16    	    1873	    646750 ns/op
+BenchmarkPart1-16    	    1872	    670563 ns/op
+BenchmarkPart1-16    	    2026	    638918 ns/op
+BenchmarkPart1-16    	    1996	    662860 ns/op
+BenchmarkPart1-16    	    1808	    659576 ns/op
+BenchmarkPart1-16    	    2020	    647393 ns/op
+BenchmarkPart1-16    	    1645	    672499 ns/op
+BenchmarkPart1-16    	    2066	    654089 ns/op
+BenchmarkPart2-16    	    2084	    560304 ns/op
+BenchmarkPart2-16    	    2137	    598724 ns/op
+BenchmarkPart2-16    	    1899	    616502 ns/op
+BenchmarkPart2-16    	    2005	    636788 ns/op
+BenchmarkPart2-16    	    2036	    589492 ns/op
+BenchmarkPart2-16    	    1794	    619185 ns/op
+BenchmarkPart2-16    	    2042	    578183 ns/op
+BenchmarkPart2-16    	    2041	    581013 ns/op
+BenchmarkPart2-16    	    2114	    588564 ns/op
+BenchmarkPart2-16    	    2148	    599458 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day2	25.858s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day20
+BenchmarkPart1-16    	    1140	    945788 ns/op
+BenchmarkPart1-16    	    1176	    960309 ns/op
+BenchmarkPart1-16    	    1329	    934065 ns/op
+BenchmarkPart1-16    	    1303	    958055 ns/op
+BenchmarkPart1-16    	    1276	    932727 ns/op
+BenchmarkPart1-16    	    1346	    900582 ns/op
+BenchmarkPart1-16    	    1328	    913114 ns/op
+BenchmarkPart1-16    	    1342	    898101 ns/op
+BenchmarkPart1-16    	    1296	    968536 ns/op
+BenchmarkPart1-16    	    1225	    916321 ns/op
+BenchmarkPart2-16    	      14	  84793506 ns/op
+BenchmarkPart2-16    	      12	  83860506 ns/op
+BenchmarkPart2-16    	      14	  89205521 ns/op
+BenchmarkPart2-16    	      15	  85431351 ns/op
+BenchmarkPart2-16    	      14	  83423924 ns/op
+BenchmarkPart2-16    	      14	  87754796 ns/op
+BenchmarkPart2-16    	      14	  89508370 ns/op
+BenchmarkPart2-16    	      13	  84601533 ns/op
+BenchmarkPart2-16    	      13	  83356142 ns/op
+BenchmarkPart2-16    	      13	  83417770 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day20	13.053s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day21
+BenchmarkPart1-16    	    1940	    559043 ns/op
+BenchmarkPart1-16    	    1828	    564230 ns/op
+BenchmarkPart1-16    	    2036	    579393 ns/op
+BenchmarkPart1-16    	    2103	    564429 ns/op
+BenchmarkPart1-16    	    2065	    567178 ns/op
+BenchmarkPart1-16    	    1893	    602073 ns/op
+BenchmarkPart1-16    	    2066	    591773 ns/op
+BenchmarkPart1-16    	    2085	    560849 ns/op
+BenchmarkPart1-16    	    2212	    597234 ns/op
+BenchmarkPart1-16    	    1914	    591467 ns/op
+BenchmarkPart2-16    	    2214	    544582 ns/op
+BenchmarkPart2-16    	    2204	    537511 ns/op
+BenchmarkPart2-16    	    2169	    564206 ns/op
+BenchmarkPart2-16    	    2190	    536266 ns/op
+BenchmarkPart2-16    	    2247	    534097 ns/op
+BenchmarkPart2-16    	    2222	    541289 ns/op
+BenchmarkPart2-16    	    2004	    536676 ns/op
+BenchmarkPart2-16    	    2185	    540660 ns/op
+BenchmarkPart2-16    	    2222	    567202 ns/op
+BenchmarkPart2-16    	    2246	    531538 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day21	24.902s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day22
+BenchmarkPart1-16    	  263845	      3933 ns/op
+BenchmarkPart1-16    	  294660	      3992 ns/op
+BenchmarkPart1-16    	  311350	      3985 ns/op
+BenchmarkPart1-16    	  307352	      3972 ns/op
+BenchmarkPart1-16    	  290247	      4106 ns/op
+BenchmarkPart1-16    	  291063	      4062 ns/op
+BenchmarkPart1-16    	  289902	      4063 ns/op
+BenchmarkPart1-16    	  264102	      3937 ns/op
+BenchmarkPart1-16    	  301839	      3867 ns/op
+BenchmarkPart1-16    	  301665	      3909 ns/op
+BenchmarkPart2-16    	       6	 193175430 ns/op
+BenchmarkPart2-16    	       6	 190689446 ns/op
+BenchmarkPart2-16    	       6	 198221932 ns/op
+BenchmarkPart2-16    	       6	 189525240 ns/op
+BenchmarkPart2-16    	       6	 191473274 ns/op
+BenchmarkPart2-16    	       6	 193147269 ns/op
+BenchmarkPart2-16    	       6	 190463364 ns/op
+BenchmarkPart2-16    	       6	 190848188 ns/op
+BenchmarkPart2-16    	       6	 188650718 ns/op
+BenchmarkPart2-16    	       6	 194056336 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day22	28.250s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day23
+BenchmarkPart1-16    	  324849	      3780 ns/op
+BenchmarkPart1-16    	  317734	      3859 ns/op
+BenchmarkPart1-16    	  280938	      3903 ns/op
+BenchmarkPart1-16    	  305539	      4007 ns/op
+BenchmarkPart1-16    	  305139	      4072 ns/op
+BenchmarkPart1-16    	  265060	      4025 ns/op
+BenchmarkPart1-16    	  284142	      3921 ns/op
+BenchmarkPart1-16    	  301317	      3834 ns/op
+BenchmarkPart1-16    	  271465	      4064 ns/op
+BenchmarkPart1-16    	  282445	      3897 ns/op
+BenchmarkPart2-16    	       1	1705150406 ns/op
+BenchmarkPart2-16    	       1	1749675871 ns/op
+BenchmarkPart2-16    	       1	1694006258 ns/op
+BenchmarkPart2-16    	       1	1697567114 ns/op
+BenchmarkPart2-16    	       1	1653242279 ns/op
+BenchmarkPart2-16    	       1	1718430318 ns/op
+BenchmarkPart2-16    	       1	1715316495 ns/op
+BenchmarkPart2-16    	       1	1612984166 ns/op
+BenchmarkPart2-16    	       1	1629962196 ns/op
+BenchmarkPart2-16    	       1	1581514009 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day23	29.945s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day24
+BenchmarkPart1-16    	    3201	    316021 ns/op
+BenchmarkPart1-16    	    3900	    333412 ns/op
+BenchmarkPart1-16    	    3787	    314776 ns/op
+BenchmarkPart1-16    	    3915	    313069 ns/op
+BenchmarkPart1-16    	    3848	    310831 ns/op
+BenchmarkPart1-16    	    3928	    309397 ns/op
+BenchmarkPart1-16    	    3351	    312107 ns/op
+BenchmarkPart1-16    	    3650	    311306 ns/op
+BenchmarkPart1-16    	    3907	    306846 ns/op
+BenchmarkPart1-16    	    3876	    303576 ns/op
+BenchmarkPart2-16    	       2	 540117406 ns/op
+BenchmarkPart2-16    	       2	 542249990 ns/op
+BenchmarkPart2-16    	       2	 556053812 ns/op
+BenchmarkPart2-16    	       2	 547365634 ns/op
+BenchmarkPart2-16    	       2	 564138759 ns/op
+BenchmarkPart2-16    	       2	 554997018 ns/op
+BenchmarkPart2-16    	       2	 561652671 ns/op
+BenchmarkPart2-16    	       2	 545438104 ns/op
+BenchmarkPart2-16    	       2	 547527814 ns/op
+BenchmarkPart2-16    	       2	 542988637 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day24	29.677s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day25
+BenchmarkPart1-16    	      87	  13574046 ns/op
+BenchmarkPart1-16    	      80	  13902298 ns/op
+BenchmarkPart1-16    	      86	  13365137 ns/op
+BenchmarkPart1-16    	      85	  13560613 ns/op
+BenchmarkPart1-16    	      84	  13358121 ns/op
+BenchmarkPart1-16    	      86	  13717958 ns/op
+BenchmarkPart1-16    	      86	  13478895 ns/op
+BenchmarkPart1-16    	      82	  13852803 ns/op
+BenchmarkPart1-16    	      85	  13563637 ns/op
+BenchmarkPart1-16    	      85	  13763667 ns/op
+BenchmarkPart2-16    	35839257	        31.4 ns/op
+BenchmarkPart2-16    	38697877	        31.2 ns/op
+BenchmarkPart2-16    	35260802	        31.3 ns/op
+BenchmarkPart2-16    	38111460	        30.7 ns/op
+BenchmarkPart2-16    	38439388	        31.1 ns/op
+BenchmarkPart2-16    	35908774	        31.9 ns/op
+BenchmarkPart2-16    	38201864	        32.4 ns/op
+BenchmarkPart2-16    	37518741	        31.0 ns/op
+BenchmarkPart2-16    	36694353	        31.1 ns/op
+BenchmarkPart2-16    	38325060	        30.7 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day25	24.850s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day3
+BenchmarkPart1-16    	   45223	     25744 ns/op
+BenchmarkPart1-16    	   47421	     25841 ns/op
+BenchmarkPart1-16    	   46005	     27036 ns/op
+BenchmarkPart1-16    	   46276	     26258 ns/op
+BenchmarkPart1-16    	   46870	     26134 ns/op
+BenchmarkPart1-16    	   45926	     25775 ns/op
+BenchmarkPart1-16    	   47119	     26104 ns/op
+BenchmarkPart1-16    	   45916	     25784 ns/op
+BenchmarkPart1-16    	   46350	     26191 ns/op
+BenchmarkPart1-16    	   45882	     25896 ns/op
+BenchmarkPart2-16    	   25334	     47154 ns/op
+BenchmarkPart2-16    	   25251	     47004 ns/op
+BenchmarkPart2-16    	   25308	     47747 ns/op
+BenchmarkPart2-16    	   25388	     47459 ns/op
+BenchmarkPart2-16    	   25119	     47284 ns/op
+BenchmarkPart2-16    	   25060	     47372 ns/op
+BenchmarkPart2-16    	   25282	     47465 ns/op
+BenchmarkPart2-16    	   25480	     47446 ns/op
+BenchmarkPart2-16    	   25411	     46938 ns/op
+BenchmarkPart2-16    	   25726	     47415 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day3	31.685s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day4
+BenchmarkPart1-16    	    2961	    401158 ns/op
+BenchmarkPart1-16    	    2952	    400327 ns/op
+BenchmarkPart1-16    	    2983	    402508 ns/op
+BenchmarkPart1-16    	    2974	    406322 ns/op
+BenchmarkPart1-16    	    2960	    403187 ns/op
+BenchmarkPart1-16    	    2989	    399679 ns/op
+BenchmarkPart1-16    	    2893	    411002 ns/op
+BenchmarkPart1-16    	    2956	    400836 ns/op
+BenchmarkPart1-16    	    2980	    410075 ns/op
+BenchmarkPart1-16    	    2990	    400463 ns/op
+BenchmarkPart2-16    	    2602	    466175 ns/op
+BenchmarkPart2-16    	    2534	    473839 ns/op
+BenchmarkPart2-16    	    2586	    463533 ns/op
+BenchmarkPart2-16    	    2620	    462781 ns/op
+BenchmarkPart2-16    	    2521	    465983 ns/op
+BenchmarkPart2-16    	    2562	    461207 ns/op
+BenchmarkPart2-16    	    2562	    465208 ns/op
+BenchmarkPart2-16    	    2346	    460104 ns/op
+BenchmarkPart2-16    	    2578	    468189 ns/op
+BenchmarkPart2-16    	    2568	    467967 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day4	25.910s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day5
+BenchmarkPart1-16    	    2173	    482053 ns/op
+BenchmarkPart1-16    	    2415	    479424 ns/op
+BenchmarkPart1-16    	    2485	    480527 ns/op
+BenchmarkPart1-16    	    2530	    482989 ns/op
+BenchmarkPart1-16    	    2463	    480232 ns/op
+BenchmarkPart1-16    	    2470	    479224 ns/op
+BenchmarkPart1-16    	    2486	    481370 ns/op
+BenchmarkPart1-16    	    2402	    486139 ns/op
+BenchmarkPart1-16    	    2457	    482528 ns/op
+BenchmarkPart1-16    	    2444	    479061 ns/op
+BenchmarkPart2-16    	    2293	    481486 ns/op
+BenchmarkPart2-16    	    2512	    488784 ns/op
+BenchmarkPart2-16    	    2408	    473668 ns/op
+BenchmarkPart2-16    	    2436	    486316 ns/op
+BenchmarkPart2-16    	    2340	    476355 ns/op
+BenchmarkPart2-16    	    2503	    478116 ns/op
+BenchmarkPart2-16    	    2462	    483192 ns/op
+BenchmarkPart2-16    	    2493	    482120 ns/op
+BenchmarkPart2-16    	    2485	    474348 ns/op
+BenchmarkPart2-16    	    2400	    475489 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day5	24.615s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day6
+BenchmarkPart1-16    	    1376	    761631 ns/op
+BenchmarkPart1-16    	    1548	    758936 ns/op
+BenchmarkPart1-16    	    1582	    775091 ns/op
+BenchmarkPart1-16    	    1564	    759556 ns/op
+BenchmarkPart1-16    	    1568	    770219 ns/op
+BenchmarkPart1-16    	    1587	    759115 ns/op
+BenchmarkPart1-16    	    1579	    758050 ns/op
+BenchmarkPart1-16    	    1599	    755100 ns/op
+BenchmarkPart1-16    	    1560	    761357 ns/op
+BenchmarkPart1-16    	    1566	    757930 ns/op
+BenchmarkPart2-16    	    1222	    968787 ns/op
+BenchmarkPart2-16    	    1244	    977579 ns/op
+BenchmarkPart2-16    	    1215	    972231 ns/op
+BenchmarkPart2-16    	    1240	    977158 ns/op
+BenchmarkPart2-16    	    1196	    979733 ns/op
+BenchmarkPart2-16    	    1215	    985903 ns/op
+BenchmarkPart2-16    	    1185	    991612 ns/op
+BenchmarkPart2-16    	    1218	    990928 ns/op
+BenchmarkPart2-16    	    1221	    984387 ns/op
+BenchmarkPart2-16    	    1215	    977225 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day6	25.750s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day7
+BenchmarkPart1-16    	     248	   4705698 ns/op
+BenchmarkPart1-16    	     249	   4719857 ns/op
+BenchmarkPart1-16    	     255	   4777588 ns/op
+BenchmarkPart1-16    	     252	   4738072 ns/op
+BenchmarkPart1-16    	     253	   4868221 ns/op
+BenchmarkPart1-16    	     248	   4746859 ns/op
+BenchmarkPart1-16    	     235	   4750907 ns/op
+BenchmarkPart1-16    	     250	   4727444 ns/op
+BenchmarkPart1-16    	     253	   4721106 ns/op
+BenchmarkPart1-16    	     254	   4736890 ns/op
+BenchmarkPart2-16    	     898	   1320495 ns/op
+BenchmarkPart2-16    	     897	   1339285 ns/op
+BenchmarkPart2-16    	     883	   1321168 ns/op
+BenchmarkPart2-16    	     906	   1323474 ns/op
+BenchmarkPart2-16    	     877	   1333809 ns/op
+BenchmarkPart2-16    	     892	   1324347 ns/op
+BenchmarkPart2-16    	     896	   1334871 ns/op
+BenchmarkPart2-16    	     884	   1335227 ns/op
+BenchmarkPart2-16    	     890	   1346981 ns/op
+BenchmarkPart2-16    	     900	   1370763 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day7	30.175s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day8
+BenchmarkScan-16     	   11628	    103266 ns/op
+BenchmarkScan-16     	   10000	    101818 ns/op
+BenchmarkScan-16     	   10000	    101008 ns/op
+BenchmarkScan-16     	   10000	    102660 ns/op
+BenchmarkScan-16     	   10000	    102793 ns/op
+BenchmarkScan-16     	   10000	    102077 ns/op
+BenchmarkScan-16     	   10000	    102702 ns/op
+BenchmarkScan-16     	   10000	    101554 ns/op
+BenchmarkScan-16     	   10000	    101590 ns/op
+BenchmarkScan-16     	   10000	    103010 ns/op
+BenchmarkPart1-16    	   12050	     99962 ns/op
+BenchmarkPart1-16    	   12068	     99624 ns/op
+BenchmarkPart1-16    	   12097	     98833 ns/op
+BenchmarkPart1-16    	   12070	    102014 ns/op
+BenchmarkPart1-16    	   12225	     99668 ns/op
+BenchmarkPart1-16    	   12070	    100289 ns/op
+BenchmarkPart1-16    	   10000	    100199 ns/op
+BenchmarkPart1-16    	   12057	     99520 ns/op
+BenchmarkPart1-16    	   10000	    102370 ns/op
+BenchmarkPart1-16    	   12064	    101335 ns/op
+BenchmarkPart2-16    	      82	  14864734 ns/op
+BenchmarkPart2-16    	      82	  14711868 ns/op
+BenchmarkPart2-16    	      81	  15037353 ns/op
+BenchmarkPart2-16    	      82	  14824164 ns/op
+BenchmarkPart2-16    	      73	  14942236 ns/op
+BenchmarkPart2-16    	      76	  14908740 ns/op
+BenchmarkPart2-16    	      70	  14994997 ns/op
+BenchmarkPart2-16    	      79	  14978698 ns/op
+BenchmarkPart2-16    	      82	  14974497 ns/op
+BenchmarkPart2-16    	      75	  14792623 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day8	43.208s
+goos: darwin
+goarch: amd64
+pkg: github.com/yulrizka/adventofcode/2020/go/day9
+BenchmarkPart1-16    	   18375	     63918 ns/op
+BenchmarkPart1-16    	   18894	     63805 ns/op
+BenchmarkPart1-16    	   18991	     62824 ns/op
+BenchmarkPart1-16    	   18366	     64141 ns/op
+BenchmarkPart1-16    	   18604	     64213 ns/op
+BenchmarkPart1-16    	   18724	     63762 ns/op
+BenchmarkPart1-16    	   19005	     65050 ns/op
+BenchmarkPart1-16    	   18709	     63625 ns/op
+BenchmarkPart1-16    	   18940	     64853 ns/op
+BenchmarkPart1-16    	   18858	     64261 ns/op
+BenchmarkPart2-16    	    8089	    127829 ns/op
+BenchmarkPart2-16    	    9486	    128244 ns/op
+BenchmarkPart2-16    	    9710	    128815 ns/op
+BenchmarkPart2-16    	    9547	    126805 ns/op
+BenchmarkPart2-16    	    9690	    130275 ns/op
+BenchmarkPart2-16    	    9090	    126342 ns/op
+BenchmarkPart2-16    	    9430	    127737 ns/op
+BenchmarkPart2-16    	    9252	    126820 ns/op
+BenchmarkPart2-16    	    9448	    128378 ns/op
+BenchmarkPart2-16    	    9530	    127732 ns/op
+PASS
+ok  	github.com/yulrizka/adventofcode/2020/go/day9	30.745s

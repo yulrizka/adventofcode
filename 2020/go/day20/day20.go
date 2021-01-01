@@ -28,8 +28,9 @@ func Part2(f io.Reader) (string, error) {
 	tiles := parse(f)
 	corners, edgeMatches := getCorners(tiles)
 
-	// pick a corner and
+	// pick a corner
 	corner := corners[0]
+
 	m := map[*tile]struct{}{}
 	for _, t := range tiles {
 		if t == corner {
@@ -42,11 +43,11 @@ func Part2(f io.Reader) (string, error) {
 	}
 
 	// align orientation so that top and left has no match
-	for len(edgeMatches[corner.top()]) > 1 {
-		corner.rotateRight()
-	}
 	for len(edgeMatches[corner.left()]) > 1 {
 		corner.flip()
+	}
+	for len(edgeMatches[corner.top()]) > 1 {
+		corner.rotateRight()
 	}
 	picture = assemble(picture, m, 0, 0)
 
