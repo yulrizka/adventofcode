@@ -24,8 +24,8 @@ func Part1(r io.Reader) (string, error) {
 
 	var i int
 	//s.png(i)
-	tolerance, direct := 4, true
-	for s.iterate(tolerance, direct) {
+	tolerance := 4
+	for s.iterate(tolerance, true) {
 		i++
 		//s.png(i)
 	}
@@ -38,8 +38,8 @@ func Part2(r io.Reader) (string, error) {
 
 	var i int
 	//s.png(i)
-	tolerance, direct := 5, false
-	for s.iterate(tolerance, direct) {
+	tolerance := 5
+	for s.iterate(tolerance, false) {
 		i++
 		//s.png(i)
 	}
