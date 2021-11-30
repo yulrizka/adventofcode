@@ -7,17 +7,17 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	aoc.Test(t, "input", "6911", Part1)
+	aoc.Test(t, "../../input/day6", "6911", Part1)
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input", "3473", Part2)
+	aoc.Test(t, "../../input/day6", "3473", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
-	aoc.Bench(b, "input", Part1)
+	aoc.Bench(b, "../../input/day6", Part1)
 }
 
 func BenchmarkPart2(b *testing.B) {
-	aoc.Bench(b, "input", Part2)
+	aoc.Bench(b, "../../input/day6", Part2)
 }

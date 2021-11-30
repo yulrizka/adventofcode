@@ -41,18 +41,18 @@ func TestPart1(t *testing.T) {
 	require.NoError(t, err)
 	assert.EqualValues(t, "1836", s)
 
-	aoc.Test(t, "input", "276", Part1)
+	aoc.Test(t, "../../input/day15", "276", Part1)
 
 }
 
 func TestPart2(t *testing.T) {
-	aoc.Test(t, "input", "31916", Part2)
+	aoc.Test(t, "../../input/day15", "31916", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
-	aoc.Bench(b, "input", Part1)
+	aoc.Bench(b, "../../input/day15", Part1)
 }
 
 func BenchmarkPart2(b *testing.B) {
-	aoc.Bench(b, "input", Part2)
+	aoc.Bench(b, "../../input/day15", Part2)
 }

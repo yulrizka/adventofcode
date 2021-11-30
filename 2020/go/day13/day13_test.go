@@ -10,7 +10,7 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	aoc.Test(t, "input", "296", Part1)
+	aoc.Test(t, "../../input/day13", "296", Part1)
 }
 
 func TestPart2(t *testing.T) {
@@ -36,13 +36,13 @@ func TestPart2(t *testing.T) {
 	require.NoError(t, err)
 	require.EqualValues(t, "1202161486", ans)
 
-	aoc.Test(t, "input", "535296695251210", Part2)
+	aoc.Test(t, "../../input/day13", "535296695251210", Part2)
 }
 
 func BenchmarkPart1(b *testing.B) {
-	aoc.Bench(b, "input", Part1)
+	aoc.Bench(b, "../../input/day13", Part1)
 }
 
 func BenchmarkPart2(b *testing.B) {
-	aoc.Bench(b, "input", Part2)
+	aoc.Bench(b, "../../input/day13", Part2)
 }
