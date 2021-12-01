@@ -1,3 +1,4 @@
+import unittest
 from functools import reduce
 import math
 
@@ -19,15 +20,16 @@ def calc2(n):
     return sum
 
 
-def test():
-    assert calc(12) == 2
-    assert calc(14) == 2
-    assert calc(1969) == 654
-    assert calc(100756) == 33583
+class TestSum(unittest.TestCase):
+    def test(self):
+        assert calc(12) == 2
+        assert calc(14) == 2
+        assert calc(1969) == 654
+        assert calc(100756) == 33583
 
-    assert calc2(14) == 2
-    assert calc2(1969) == 966
-    assert calc2(100756) == 50346
+        assert calc2(14) == 2
+        assert calc2(1969) == 966
+        assert calc2(100756) == 50346
 
 
 print("part 1: ",  reduce(lambda x, y: x + calc(y), data, 0))
