@@ -19,11 +19,9 @@ class IntComp:
         addr = self.ip + i
         v = self.mem[addr]
         if mode == '0':
-            # position mode
-            return self.mem[v]
+            return self.mem[v]  # position mode
         else:
-            # immediate mode
-            return v
+            return v  # immediate mode
 
     def run(self):
         out = ''
@@ -39,7 +37,7 @@ class IntComp:
                 op = int(num_str[-2:])
                 mode = num_str[-3::-1]  # remove op & reverse
                 if len(mode) < 3:
-                    mode += '0' * (3-len(mode))
+                    mode += '0' * (3 - len(mode))
 
             print("ip:{} num:{}, op:{}, mode:{}".format(self.ip, num, op, mode))
 
@@ -145,4 +143,3 @@ class TestSum(unittest.TestCase):
 
         self.run_sample('3,3,1107,-1,8,3,4,3,99', 8, 0)
         self.run_sample('3,3,1107,-1,8,3,4,3,99', 7, 1)
-
