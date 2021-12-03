@@ -15,18 +15,19 @@ def part1(nums):
             if digit == '1':
                 common[i] += 1
 
-    result = ''
+    result, inv = '', ''
     for i in range(digits):
-        result += '1' if common[i] > (len(data) / 2 + 1) else '0'
-
-    inv = ''
-    for i in range(len(result)):
-        inv += '1' if result[i] == '0' else '0'
+        if common[i] > math.ceil(len(data) / 2 + 1):
+            result += '1'
+            inv += '0'
+        else:
+            result += '0'
+            inv += '1'
 
     return result, inv
 
 
-def part2(nums, common):
+def part2(nums, useCommon):
     nums = nums[:]
     for i in range(digits):
         if len(nums) == 1:
@@ -37,12 +38,12 @@ def part2(nums, common):
             if line[i] == '1':
                 ones += 1
 
-        if common:
-            keepOne = ones >= math.ceil(len(nums) / 2)
+        if useCommon:
+            keep_one = ones >= math.ceil(len(nums) / 2)
         else:
-            keepOne = ones < math.ceil(len(nums) / 2)
+            keep_one = ones < math.ceil(len(nums) / 2)
 
-        if keepOne:
+        if keep_one:
             filtered = list(filter(lambda x: (x[i] == '1'), nums))
         else:
             filtered = list(filter(lambda x: (x[i] == '0'), nums))
