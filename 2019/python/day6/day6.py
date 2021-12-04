@@ -12,7 +12,7 @@ def paths(x, n=0):
     for y in orbits[x]:
         if y == 'COM':
             return n + 1
-        return paths(y, n+1)
+        return paths(y, n + 1)
 
 
 def part1():
@@ -20,8 +20,6 @@ def part1():
     for x in orbits:
         count += paths(x)
     return count
-
-
 
 
 def part2():
@@ -52,8 +50,7 @@ def part2():
         if i in you:
             distance.append(san[i] + you[i])
 
-    return min(distance)-2 # -2 minus -1 for earch to reach the same spot
-
+    return min(distance) - 2  # -2 minus -1 for earch to reach the same spot
 
 
 class TestSum(unittest.TestCase):
@@ -67,4 +64,3 @@ class TestSum(unittest.TestCase):
         ans = part2()
         print(ans)
         assert ans == 407
-
