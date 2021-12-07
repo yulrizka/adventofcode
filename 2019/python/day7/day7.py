@@ -135,9 +135,6 @@ class Scheduler:
 
     def run(self):
         while len(self.procs) > 0:
-            # get process from the front of the queue
-            # check for pid
-
             proc = self.procs[0]
             if not proc.runnable():
                 self.procs = self.procs[1:] + [self.procs[0]]
@@ -183,7 +180,7 @@ def part2():
         sched = Scheduler()
 
         for i, v in enumerate(num):
-            # setup pipe
+            # setup pipe. connect process output to the next process input
             comps[i].input = comps[i - 1].output = collections.deque([])
             comps[i].add_input(v)  # settings
             sched.add(comps[i])
