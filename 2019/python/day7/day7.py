@@ -12,13 +12,13 @@ DONE = 99
 
 class IntComp:
 
-    def __init__(self, nums, id=0):
+    def __init__(self, nums, pid=0):
         self.mem = []
         self.ip = 0
         self.input = collections.deque([])
         self.output = collections.deque([])
         self.state = RUNNABLE
-        self.id = id
+        self.pid = pid
         self.mem = nums.copy()
 
     def runnable(self):
@@ -26,9 +26,6 @@ class IntComp:
             self.state = RUNNABLE
 
         return self.state == RUNNABLE
-
-    def set_input(self, v):
-        self.input = v
 
     def add_input(self, v):
         self.input.append(v)
@@ -193,7 +190,6 @@ def part2():
 
     ans = max(vals)
     return ans
-
 
 
 class TestSum(unittest.TestCase):
