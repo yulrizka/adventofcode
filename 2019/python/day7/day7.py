@@ -33,10 +33,8 @@ class IntComp:
     def params(self, i, mode):
         addr = self.ip + i
         v = self.mem[addr]
-        if mode == '0':
-            return self.mem[v]  # position mode
-        else:
-            return v  # immediate mode
+        # mode 0:reference 1:immediate
+        return self.mem[v] if mode == '0' else v
 
     def run(self):
         out = ''
@@ -125,23 +123,21 @@ class IntComp:
 class Scheduler:
 
     def __init__(self):
-        self.procs = []
+        self.procs = collections.deque([])
 
     def add(self, proc):
         self.procs.append(proc)
 
     def run(self):
         while len(self.procs) > 0:
-            proc = self.procs[0]
+            proc = self.procs.popleft()
             if not proc.runnable():
-                self.procs = self.procs[1:] + [self.procs[0]]
+                self.procs.append(proc)
                 continue
 
             proc.run()
             if not proc.state == DONE:
-                self.procs = self.procs[1:] + [self.procs[0]]
-            else:
-                self.procs = self.procs[1:]
+                self.procs.append(proc)
 
 
 def part1():
@@ -178,7 +174,7 @@ def part2():
 
         for i, v in enumerate(num):
             # setup pipe. connect process output to the next process input
-            comps[i].input = comps[i - 1].output = collections.deque([])
+            comps[i].input = comps[i - 1].output
             comps[i].add_input(v)  # settings
             sched.add(comps[i])
 
