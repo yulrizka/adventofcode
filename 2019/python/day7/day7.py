@@ -1,20 +1,37 @@
+import collections
 import fileinput
 import itertools
 import unittest
 
 data = [int(i) for i in fileinput.input("../../input/day7").readline().strip().split(',')]
 
+RUNNABLE = 0
+WAITING_INPUT = 1
+DONE = 99
+
 
 class IntComp:
-    mem = []
-    ip = 0
-    input = []
 
-    def __init__(self, nums):
+    def __init__(self, nums, id=0):
+        self.mem = []
+        self.ip = 0
+        self.input = collections.deque([])
+        self.output = collections.deque([])
+        self.state = RUNNABLE
+        self.id = id
         self.mem = nums.copy()
+
+    def runnable(self):
+        if self.state == WAITING_INPUT and len(self.input) > 0:
+            self.state = RUNNABLE
+
+        return self.state == RUNNABLE
 
     def set_input(self, v):
         self.input = v
+
+    def add_input(self, v):
+        self.input.append(v)
 
     def params(self, i, mode):
         addr = self.ip + i
@@ -44,6 +61,7 @@ class IntComp:
 
             match op:
                 case 99:
+                    self.state = DONE
                     return out
                 case 1:
                     p1 = self.params(1, mode[0])
@@ -60,15 +78,21 @@ class IntComp:
                 case 3:
                     p = self.params(1, '1')
                     # v = input('input: ')
-                    v = self.input[0]
-                    self.input = self.input[1:]
+
+                    # block if no input
+                    if len(self.input) == 0:
+                        self.state = WAITING_INPUT
+                        return
+
+                    v = self.input.popleft()
                     self.mem[p] = v
                     self.ip += 2
                 case 4:
                     p = self.params(1, mode)
                     v = self.mem[p]
-                    # print("{} > {}".format(p, v))
+                    # print("{} > {}".format(self.id, v))
                     out = v
+                    self.output.append(v)
                     self.ip += 2
                 case 5:
                     p1 = self.params(1, mode[0])
@@ -102,17 +126,28 @@ class IntComp:
 
 
 class Scheduler:
-    procs = []
+
+    def __init__(self):
+        self.procs = []
 
     def add(self, proc):
         self.procs.append(proc)
 
     def run(self):
-        while True:
+        while len(self.procs) > 0:
             # get process from the front of the queue
             # check for pid
-            if len(self.procs) == 0:
-                return
+
+            proc = self.procs[0]
+            if not proc.runnable():
+                self.procs = self.procs[1:] + [self.procs[0]]
+                continue
+
+            proc.run()
+            if not proc.state == DONE:
+                self.procs = self.procs[1:] + [self.procs[0]]
+            else:
+                self.procs = self.procs[1:]
 
 
 def part1():
@@ -123,8 +158,10 @@ def part1():
         output = 0
         for i in range(5):
             comp = IntComp(data)
-            comp.set_input([num[i], output])
-            output = comp.run()
+            comp.add_input(num[i])
+            comp.add_input(output)
+            comp.run()
+            output = comp.output.popleft()
 
         vals.append(output)
 
@@ -132,9 +169,34 @@ def part1():
 
 
 def part2():
-    c = IntComp(data)
-    c.set_input(5)
-    return c.run()
+    vals = []
+    nums = itertools.permutations([5, 6, 7, 8, 9])
+    for num in nums:
+        comps = [
+            IntComp(data, 0),
+            IntComp(data, 1),
+            IntComp(data, 2),
+            IntComp(data, 3),
+            IntComp(data, 4),
+        ]
+
+        sched = Scheduler()
+
+        for i, v in enumerate(num):
+            # setup pipe
+            comps[i].input = comps[i - 1].output = collections.deque([])
+            comps[i].add_input(v)  # settings
+            sched.add(comps[i])
+
+        comps[0].add_input(0)  # initial value
+
+        sched.run()
+        val = comps[4].output.popleft()
+        vals += [val]
+
+    ans = max(vals)
+    return ans
+
 
 
 class TestSum(unittest.TestCase):
@@ -147,4 +209,4 @@ class TestSum(unittest.TestCase):
     def test2(self):
         ans = part2()
         print(ans)
-        assert ans == 8834787
+        assert ans == 39431233
