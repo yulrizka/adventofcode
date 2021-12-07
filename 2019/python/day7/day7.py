@@ -101,6 +101,20 @@ class IntComp:
                     raise Exception('invalid op', op)
 
 
+class Scheduler:
+    procs = []
+
+    def add(self, proc):
+        self.procs.append(proc)
+
+    def run(self):
+        while True:
+            # get process from the front of the queue
+            # check for pid
+            if len(self.procs) == 0:
+                return
+
+
 def part1():
     vals = []
     nums = itertools.permutations([0, 1, 2, 3, 4])
