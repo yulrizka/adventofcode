@@ -13,7 +13,6 @@ def neigh(row, col):
         y, x = (row + n[0], col + n[1])
         if y < 0 or x < 0 or y > 99 or x > 99:
             continue
-        # result.append(int([y][x]))
         result.append((y, x))
     return result
 
