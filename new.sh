@@ -19,7 +19,9 @@ function python() {
 import fileinput
 import unittest
 
-data = [int(i) for i in fileinput.input("../../input/day$day").readline().split(',')]
+
+with open('../../input/day$day') as f:
+    data = f.read().strip()
 print(data)
 
 
