@@ -19,8 +19,8 @@ function python() {
 import fileinput
 import unittest
 
-
-with open('../../input/day$day') as f:
+infile = sys.argv[1] if len(sys.argv)>1 else '../../input/day$day'
+with open(infile) as f:
     data = f.read().strip()
 print(data)
 
@@ -37,13 +37,11 @@ class TestSum(unittest.TestCase):
 
     def test1(self):
         ans = part1()
-        print(ans)
-        assert ans == 0
+        assert ans == 0, f'got {ans}'
 
     def test2(self):
         ans = part2()
-        print(ans)
-        assert ans == 0
+        assert ans == 0, f'got {ans}'
 EOF
 
   echo "python"
