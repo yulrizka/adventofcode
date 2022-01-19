@@ -1,4 +1,6 @@
 import unittest
+from functools import reduce
+from operator import mul
 
 with open('../../input/day16') as f:
     data = f.read().strip()
@@ -43,20 +45,20 @@ def parse(s, i):
             read = 5
 
             done = grp == '0'
-            print(grp, v)
 
-        print(f'read % 4 {read %4}, i:{i}')
         if read % 4 != 0:
             i += (read %4) - 1
 
         v = int(bs, 2)
         print(f'>> literal: {v} i:{i}')
+
+        return i, v
     else:
         # operator
         len_id = s[i]
         i += 1
     
-
+        nums = []
         if len_id == '0':
             total_len = int(s[i:i+15], 2)
             i += 15
@@ -66,31 +68,48 @@ def parse(s, i):
             print(f'type 0: total_len={total_len}')
             
             while i < last:
-                print(f'last: {last} , i:{i}')
-                i = parse(s, i)
+                i, v  = parse(s, i)
+                nums.append(v)
 
         else:
             # 11 bit are number sub package
             total_pkg = int(s[i:i+11], 2)
             i += 11
-            print(f'type not 0: total_pkg={total_pkg}')
+            # print(f'type not 0: total_pkg={total_pkg}')
 
             for x in range(0,total_pkg):
-                i = parse(s, i)
-                
+                i, v = parse(s, i)
+                nums.append(v)
+        
+        match typ:
+            case 0: # sum
+                return i, sum(nums)
+            case 1: # product
+                return i, reduce(mul, nums)
+            case 2: # min
+                return i, min(nums)
+            case 3: # max
+                return i, max(nums)
+            case 5: # gt
+                return i, 1 if nums[0] > nums[1] else 0
+            case 6: # lt
+                return i, 1 if nums[0] < nums[1] else 0
+            case 7: # eq
+                return i, 1 if nums[0] == nums[1] else 0
+            
 
     return i
 
 
 def part1():
     global total_version
-    parse(hexToBin(data), 0)
-    print(f'total version {total_version}')
-
-part1()
+    i, _ = parse(hexToBin(data), 0)
+    return total_version
 
 def part2():
-    ...
+    i, ans = parse(hexToBin(data), 0)
+    return ans
+
 
 
 class TestSum(unittest.TestCase):
@@ -109,9 +128,9 @@ class TestSum(unittest.TestCase):
     def test1(self):
         ans = part1()
         print(ans)
-        assert ans == 0
+        assert ans == 895
 
     def test2(self):
         ans = part2()
         print(ans)
-        assert ans == 0
+        assert ans == 1148595959144
