@@ -18,6 +18,7 @@ function python() {
   cat <<EOF > "$year/python/day$day/day$day.py"
 import fileinput
 import unittest
+import sys
 
 infile = sys.argv[1] if len(sys.argv)>1 else '../../input/day$day'
 with open(infile) as f:
