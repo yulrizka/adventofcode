@@ -21,6 +21,7 @@ import unittest
 import sys
 
 infile = sys.argv[1] if len(sys.argv)>1 else '../../input/day$day'
+# infile = sys.argv[1] if len(sys.argv)>1 else '../../input/day$day.sample'
 with open(infile) as f:
     data = f.read().strip()
 print(data)
