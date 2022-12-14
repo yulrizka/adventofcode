@@ -16,7 +16,6 @@ function python() {
   getInput
   mkdir -p "$year/python/day$day"
   cat <<EOF > "$year/python/day$day/day$day.py"
-import fileinput
 import unittest
 import sys
 
