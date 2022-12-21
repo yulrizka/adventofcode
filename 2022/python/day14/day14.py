@@ -19,7 +19,7 @@ def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
 
-def part1():
+def get_map():
     map = {}
     for line in data.split('\n'):
         start = None
@@ -44,9 +44,18 @@ def part1():
                     map[(dx, y)] = 'x'
             start = point
 
+    return map
+
+
+def solve(part):
+    map = get_map()
+
     maxy = 0
     for x in map:
         maxy = max(maxy, x[1])
+
+    if part == 2:
+        maxy = maxy + 2
 
     sand = None
     num_sand = 0
@@ -56,8 +65,15 @@ def part1():
             num_sand += 1
 
         # print(sand)
-        if sand[1] > maxy:
-            break
+        if part == 1:
+            if sand[1] > maxy:
+                break
+        else:
+            if sand[1] == maxy - 1:
+                # settle
+                map[sand] = 'o'
+                sand = None
+                continue
 
         # check bottom direction
         bl, bb, br = add(sand, dir[0]), add(sand, dir[1]), add(sand, dir[2])
@@ -75,24 +91,34 @@ def part1():
                     continue
                 else:
                     map[sand] = 'o'
-                    print('stable', sand)
                     # stable
+                    if part == 1:
+                        sand = None
+                        continue
+                    else:
+                        if sand == (500, 0):
+                            break
                     sand = None
-                    continue
 
-    return num_sand -1
+    if part == 1:
+        num_sand -= 1
+    return num_sand
+
+
+def part1():
+    return solve(1)
 
 
 def part2():
-    ...
+    return solve(2)
 
 
 class TestSum(unittest.TestCase):
 
     def test1(self):
         ans = part1()
-        assert ans == 0, f'got {ans}'
+        assert ans == 799, f'got {ans}'
 
     def test2(self):
         ans = part2()
-        assert ans == 0, f'got {ans}'
+        assert ans == 29076, f'got {ans}'
